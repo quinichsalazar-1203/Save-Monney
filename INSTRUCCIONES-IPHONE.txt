@@ -1,0 +1,69 @@
+📱 CÓMO INSTALAR TU APP DE FINANZAS EN iPHONE
+================================================
+
+PASO 1: Iniciar el servidor en tu Mac
+--------------------------------------
+1. Abre la Terminal
+2. Navega a la carpeta donde están los archivos:
+   cd /Users/quinichs.
+
+3. Ejecuta el servidor:
+   python3 servidor-finanzas.py
+
+4. Verás un mensaje con la dirección IP (ejemplo: http://192.168.1.5:8080)
+   ¡NO CIERRES ESTA VENTANA! Déjala abierta mientras instalas la app.
+
+
+PASO 2: Instalar en tu iPhone
+------------------------------
+1. Asegúrate que tu iPhone esté conectado a la MISMA RED WIFI que tu Mac
+
+2. Abre Safari en tu iPhone (IMPORTANTE: debe ser Safari, no Chrome)
+
+3. En la barra de direcciones, escribe la URL que apareció en la Terminal
+   Ejemplo: http://192.168.1.5:8080/gestor-finanzas.html
+
+4. La página se cargará. Ahora toca el botón "Compartir"
+   (el ícono del cuadrado con flecha hacia arriba, abajo en el centro)
+
+5. Desliza hacia abajo en el menú y busca "Añadir a pantalla de inicio"
+
+6. Puedes cambiar el nombre si quieres, luego toca "Añadir"
+
+7. ¡Listo! Ahora tendrás un ícono en tu pantalla de inicio
+
+
+PASO 3: Usar la app
+-------------------
+- Una vez instalada, puedes CERRAR el servidor en tu Mac (Ctrl+C en la Terminal)
+- La app funcionará OFFLINE desde tu iPhone
+- Todos tus datos se guardan en tu teléfono (localStorage)
+- Funciona como una app nativa
+
+
+NOTAS IMPORTANTES
+-----------------
+✓ Tus datos están seguros y solo en tu iPhone
+✓ No necesitas conexión a internet después de instalar
+✓ Solo necesitas el servidor cuando quieras reinstalar o actualizar
+✓ DEBE ser Safari para instalar (es requisito de iOS)
+
+
+PROBLEMAS COMUNES
+-----------------
+❌ "No puedo acceder a la página"
+   → Verifica que estés en la misma WiFi
+   → Revisa que copiaste bien la IP
+
+❌ "No veo la opción de añadir a pantalla"
+   → Asegúrate de usar Safari, no otro navegador
+   → Verifica que estés en iOS 13 o superior
+
+❌ "La página no carga"
+   → Verifica que el servidor siga corriendo en tu Mac
+   → Revisa que no haya ningún firewall bloqueando
+
+
+¿PREGUNTAS?
+-----------
+Si tienes algún problema, avísame y te ayudo.
