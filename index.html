@@ -40,7 +40,6 @@
             --shadow-md: 0 4px 12px rgb(0 0 0 / 0.08), 0 2px 4px rgb(0 0 0 / 0.04);
             --shadow-lg: 0 20px 40px rgb(0 0 0 / 0.12), 0 8px 16px rgb(0 0 0 / 0.06);
         }
-
         [data-theme="dark"] {
             --bg-primary: #1e293b;
             --bg-secondary: #0f172a;
@@ -67,11 +66,8 @@
             --shadow-md: 0 4px 12px rgb(0 0 0 / 0.4), 0 2px 4px rgb(0 0 0 / 0.3);
             --shadow-lg: 0 20px 40px rgb(0 0 0 / 0.5), 0 8px 16px rgb(0 0 0 / 0.4);
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
         html { -webkit-text-size-adjust: 100%; }
-
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
             background: var(--bg-secondary);
@@ -80,10 +76,7 @@
             padding-bottom: 80px;
             -webkit-font-smoothing: antialiased;
         }
-
         .app-container { max-width: 600px; margin: 0 auto; }
-
-        /* ── Header ─────────────────────────────────────────────────────────── */
         .header {
             background: var(--bg-primary);
             padding: 14px 20px 0;
@@ -93,229 +86,133 @@
             z-index: 100;
             box-shadow: var(--shadow-xs);
         }
-
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .header-title {
-            font-size: 1.375rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            letter-spacing: -0.02em;
-        }
-
-        .header-period-label {
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            background: var(--bg-tertiary);
-            padding: 4px 10px;
-            border-radius: 20px;
-        }
-
-        .header-filter {
-            display: flex;
-            gap: 4px;
-            margin-bottom: 14px;
-            background: var(--bg-tertiary);
-            border-radius: 10px;
-            padding: 3px;
-        }
-
-        .header-filter-btn {
-            flex: 1;
-            padding: 7px 6px;
-            background: transparent;
-            border: none;
-            border-radius: 8px;
-            font-size: 0.8125rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .header-filter-btn.active {
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            font-weight: 600;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .mini-indicators {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1px;
-            background: var(--border-color);
-            border-top: 1px solid var(--border-color);
-            margin: 0 -20px;
-        }
-
-        .mini-indicator {
-            text-align: center;
-            padding: 12px 8px;
-            background: var(--bg-primary);
-        }
-
-        .mini-indicator .label {
-            font-size: 0.65rem;
-            color: var(--text-tertiary);
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-            font-weight: 600;
-            margin-bottom: 3px;
-        }
-
+        .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .header-title { font-size: 1.375rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.02em; }
+        .header-period-label { font-size: 0.75rem; font-weight: 500; color: var(--text-secondary); background: var(--bg-tertiary); padding: 4px 10px; border-radius: 20px; }
+        .header-filter { display: flex; gap: 4px; margin-bottom: 14px; background: var(--bg-tertiary); border-radius: 10px; padding: 3px; }
+        .header-filter-btn { flex: 1; padding: 7px 6px; background: transparent; border: none; border-radius: 8px; font-size: 0.8125rem; font-weight: 500; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; }
+        .header-filter-btn.active { background: var(--bg-primary); color: var(--text-primary); font-weight: 600; box-shadow: var(--shadow-sm); }
+        .mini-indicators { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border-color); border-top: 1px solid var(--border-color); margin: 0 -20px; }
+        .mini-indicator { text-align: center; padding: 12px 8px; background: var(--bg-primary); }
+        .mini-indicator .label { font-size: 0.65rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.6px; font-weight: 600; margin-bottom: 3px; }
         .mini-indicator .value { font-size: 1.0625rem; font-weight: 700; letter-spacing: -0.02em; }
         .mini-indicator.balance .value { color: var(--text-primary); }
         .mini-indicator.income .value { color: var(--success); }
         .mini-indicator.expense .value { color: var(--danger); }
-
-        /* ── Sections ────────────────────────────────────────────────────────── */
         .main-content { padding: 0; min-height: calc(100vh - 160px); }
         .section { display: none; animation: fadeUp 0.25s ease; }
         .section.active { display: block; }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ── Page header ─────────────────────────────────────────────────────── */
-        .page-header {
-            padding: 20px 20px 4px;
-        }
-
-        .page-title {
-            font-size: 1.125rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            letter-spacing: -0.02em;
-        }
-
-        .page-subtitle {
-            font-size: 0.8125rem;
-            color: var(--text-secondary);
-            margin-top: 2px;
-        }
-
-        /* ── Cards / Surfaces ────────────────────────────────────────────────── */
-        .card {
-            background: var(--bg-primary);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border-color);
-        }
-
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .page-header { padding: 20px 20px 4px; }
+        .page-title { font-size: 1.125rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.02em; }
+        .page-subtitle { font-size: 0.8125rem; color: var(--text-secondary); margin-top: 2px; }
+        .card { background: var(--bg-primary); border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); }
         .card-padded { padding: 18px; }
-
         .card + .card { margin-top: 12px; }
-
-        .section-label {
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.7px;
-            color: var(--text-tertiary);
-            padding: 16px 20px 8px;
-        }
-
-        /* ── Register ────────────────────────────────────────────────────────── */
+        .section-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--text-tertiary); padding: 16px 20px 8px; }
         .register-content { padding: 12px 16px 0; }
-
-        label {
-            display: block;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            margin-bottom: 6px;
-            letter-spacing: 0.01em;
-        }
-
-        input, select, textarea {
+        label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; letter-spacing: 0.01em; }
+        input, select, textarea { width: 100%; padding: 12px 14px; border: 1.5px solid var(--border-color); border-radius: var(--radius-sm); font-size: 0.9375rem; color: var(--text-primary); background: var(--bg-primary); transition: border-color 0.15s, box-shadow 0.15s; -webkit-appearance: none; font-family: inherit; }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.1); }
+        textarea { resize: none; line-height: 1.5; }
+        .form-group { margin-bottom: 14px; }
+        .form-group:last-child { margin-bottom: 0; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .amount-input-wrap { position: relative; }
+        .amount-input-wrap .currency-prefix { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 1.25rem; font-weight: 700; color: var(--text-tertiary); pointer-events: none; }
+        .amount-input-wrap input { padding-left: 32px; }
+        /* Amount display div (custom keypad trigger) */
+        .amount-display {
             width: 100%;
-            padding: 12px 14px;
+            padding: 12px 14px 12px 36px;
             border: 1.5px solid var(--border-color);
             border-radius: var(--radius-sm);
-            font-size: 0.9375rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
             color: var(--text-primary);
             background: var(--bg-primary);
+            cursor: pointer;
+            min-height: 52px;
+            display: flex;
+            align-items: center;
             transition: border-color 0.15s, box-shadow 0.15s;
-            -webkit-appearance: none;
-            font-family: inherit;
+            user-select: none;
         }
-
-        input:focus, select:focus, textarea:focus {
+        .amount-display:focus, .amount-display.focused {
             outline: none;
             border-color: var(--accent);
             box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.1);
         }
-
-        input[type="number"] {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
+        .amount-display.placeholder { color: var(--text-tertiary); font-weight: 400; font-size: 0.9375rem; }
+        /* Numeric keypad overlay */
+        .keypad-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.45);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 1500;
+            align-items: flex-end;
+            justify-content: center;
         }
-
-        textarea { resize: none; line-height: 1.5; }
-
-        .form-group { margin-bottom: 14px; }
-        .form-group:last-child { margin-bottom: 0; }
-
-        .form-row {
+        .keypad-overlay.active { display: flex; }
+        .keypad-sheet {
+            background: var(--bg-primary);
+            border-radius: var(--radius) var(--radius) 0 0;
+            padding: 16px 16px 32px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: var(--shadow-lg);
+            animation: sheetUp 0.22s ease;
+        }
+        .keypad-display {
+            text-align: center;
+            font-size: 2.25rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            color: var(--text-primary);
+            padding: 10px 0 18px;
+            min-height: 64px;
+        }
+        .keypad-display .kd-prefix { color: var(--text-tertiary); font-size: 1.5rem; font-weight: 600; margin-right: 4px; }
+        .keypad-display.placeholder-kd { color: var(--text-tertiary); font-size: 1.25rem; font-weight: 400; }
+        .keypad-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(3, 1fr);
             gap: 10px;
         }
-
-        /* Amount display */
-        .amount-input-wrap {
-            position: relative;
-        }
-
-        .amount-input-wrap .currency-prefix {
-            position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-tertiary);
-            pointer-events: none;
-        }
-
-        .amount-input-wrap input {
-            padding-left: 32px;
-        }
-
-        /* Action buttons */
-        .action-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 16px;
-        }
-
-        .btn-income, .btn-expense, .btn-transfer, .btn-primary {
-            padding: 14px;
-            border: none;
+        .kp-btn {
+            padding: 18px 0;
+            background: var(--bg-tertiary);
+            border: 1.5px solid var(--border-color);
             border-radius: var(--radius-sm);
-            font-size: 0.9375rem;
+            font-size: 1.375rem;
             font-weight: 600;
+            color: var(--text-primary);
             cursor: pointer;
-            transition: all 0.15s ease;
+            transition: all 0.1s;
+            font-family: inherit;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
-            color: white;
-            letter-spacing: -0.01em;
         }
-
+        .kp-btn:active { transform: scale(0.93); background: var(--border-color); }
+        .kp-btn.kp-backspace { color: var(--danger); }
+        .kp-btn.kp-confirm {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            font-size: 1.5rem;
+        }
+        .kp-btn.kp-confirm:active { filter: brightness(0.9); }
+        .action-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+        .btn-income, .btn-expense, .btn-transfer, .btn-primary {
+            padding: 14px; border: none; border-radius: var(--radius-sm);
+            font-size: 0.9375rem; font-weight: 600; cursor: pointer; transition: all 0.15s ease;
+            display: flex; align-items: center; justify-content: center; gap: 6px; color: white; letter-spacing: -0.01em;
+        }
         .btn-income { background: var(--success); }
         .btn-income:hover { filter: brightness(1.07); }
         .btn-expense { background: var(--danger); }
@@ -324,802 +221,172 @@
         .btn-transfer:hover { filter: brightness(1.07); }
         .btn-primary { background: var(--accent); }
         .btn-primary:hover { filter: brightness(1.1); }
-
-        .btn-income:active, .btn-expense:active,
-        .btn-transfer:active, .btn-primary:active { transform: scale(0.97); }
-
-        .btn-secondary {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            width: 100%;
-            padding: 12px;
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-            border: 1.5px solid var(--border-color);
-            border-radius: var(--radius-sm);
-            font-size: 0.875rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.15s;
-            font-family: inherit;
-        }
-
+        .btn-income:active, .btn-expense:active, .btn-transfer:active, .btn-primary:active { transform: scale(0.97); }
+        .btn-secondary { display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; padding: 12px; background: var(--bg-tertiary); color: var(--text-primary); border: 1.5px solid var(--border-color); border-radius: var(--radius-sm); font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.15s; font-family: inherit; }
         .btn-secondary:hover { background: var(--bg-secondary); border-color: var(--accent); }
         .btn-secondary:active { transform: scale(0.98); }
-
-        .btn-ghost {
-            padding: 8px 14px;
-            background: transparent;
-            border: 1.5px solid var(--border-color);
-            border-radius: var(--radius-sm);
-            font-size: 0.8125rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: all 0.15s;
-            font-family: inherit;
-        }
-
+        .btn-ghost { padding: 8px 14px; background: transparent; border: 1.5px solid var(--border-color); border-radius: var(--radius-sm); font-size: 0.8125rem; font-weight: 500; color: var(--text-secondary); cursor: pointer; transition: all 0.15s; font-family: inherit; }
         .btn-ghost:hover { border-color: var(--accent); color: var(--text-primary); }
-
-        .btn-icon-sm {
-            padding: 6px 8px;
-            background: transparent;
-            border: 1.5px solid var(--border-color);
-            border-radius: 6px;
-            color: var(--text-tertiary);
-            cursor: pointer;
-            transition: all 0.15s;
-            font-size: 0.9rem;
-            line-height: 1;
-        }
-
-        .btn-icon-sm:hover {
-            border-color: var(--danger);
-            color: var(--danger);
-            background: var(--danger-light);
-        }
-
-        .btn-icon-sm.edit:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: rgba(var(--accent-rgb), 0.08);
-        }
-
-        /* ── Accounts ────────────────────────────────────────────────────────── */
+        .btn-icon-sm { padding: 6px 8px; background: transparent; border: 1.5px solid var(--border-color); border-radius: 6px; color: var(--text-tertiary); cursor: pointer; transition: all 0.15s; font-size: 0.9rem; line-height: 1; }
+        .btn-icon-sm:hover { border-color: var(--danger); color: var(--danger); background: var(--danger-light); }
+        .btn-icon-sm.edit:hover { border-color: var(--accent); color: var(--accent); background: rgba(var(--accent-rgb), 0.08); }
         .accounts-content { padding: 0 16px 16px; }
-
-        .total-balance-card {
-            background: linear-gradient(135deg, var(--accent) 0%, color-mix(in srgb, var(--accent) 70%, #6366f1) 100%);
-            color: white;
-            border-radius: var(--radius);
-            padding: 22px 20px;
-            margin: 12px 0 4px;
-            box-shadow: var(--shadow-md);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .total-balance-card::after {
-            content: '';
-            position: absolute;
-            top: -30px; right: -30px;
-            width: 120px; height: 120px;
-            background: rgba(255,255,255,0.07);
-            border-radius: 50%;
-        }
-
-        .total-balance-card .tbc-label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            opacity: 0.75;
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-            margin-bottom: 6px;
-        }
-
-        .total-balance-card .tbc-amount {
-            font-size: 2.25rem;
-            font-weight: 800;
-            letter-spacing: -0.04em;
-            line-height: 1;
-            margin-bottom: 6px;
-        }
-
-        .total-balance-card .tbc-sub {
-            font-size: 0.775rem;
-            opacity: 0.65;
-        }
-
-        .accounts-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin: 12px 0;
-        }
-
-        .account-card {
-            background: var(--bg-primary);
-            border-radius: var(--radius);
-            padding: 14px;
-            box-shadow: var(--shadow-sm);
-            border: 1.5px solid var(--border-color);
-            transition: all 0.2s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .account-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 3px;
-            background: var(--account-color, var(--border-color));
-        }
-
+        .total-balance-card { background: linear-gradient(135deg, var(--accent) 0%, color-mix(in srgb, var(--accent) 70%, #6366f1) 100%); color: white; border-radius: var(--radius); padding: 22px 20px; margin: 12px 0 4px; box-shadow: var(--shadow-md); position: relative; overflow: hidden; }
+        .total-balance-card::after { content: ''; position: absolute; top: -30px; right: -30px; width: 120px; height: 120px; background: rgba(255,255,255,0.07); border-radius: 50%; }
+        .total-balance-card .tbc-label { font-size: 0.75rem; font-weight: 600; opacity: 0.75; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 6px; }
+        .total-balance-card .tbc-amount { font-size: 2.25rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1; margin-bottom: 6px; }
+        .total-balance-card .tbc-sub { font-size: 0.775rem; opacity: 0.65; }
+        .accounts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+        .account-card { background: var(--bg-primary); border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow-sm); border: 1.5px solid var(--border-color); transition: all 0.2s; position: relative; overflow: hidden; }
+        .account-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--account-color, var(--border-color)); }
         .account-card:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
-
-        .account-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 10px;
-        }
-
-        .account-icon {
-            font-size: 1.625rem;
-            line-height: 1;
-        }
-
+        .account-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+        .account-icon { font-size: 1.625rem; line-height: 1; }
         .account-card-actions { display: flex; gap: 4px; }
-
-        .account-name {
-            font-weight: 700;
-            font-size: 0.875rem;
-            color: var(--text-primary);
-            margin-bottom: 2px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .account-meta {
-            font-size: 0.7rem;
-            color: var(--text-tertiary);
-            font-weight: 500;
-            margin-bottom: 10px;
-        }
-
-        .account-balance {
-            font-size: 1.1875rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            letter-spacing: -0.03em;
-        }
-
+        .account-name { font-weight: 700; font-size: 0.875rem; color: var(--text-primary); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .account-meta { font-size: 0.7rem; color: var(--text-tertiary); font-weight: 500; margin-bottom: 10px; }
+        .account-balance { font-size: 1.1875rem; font-weight: 800; color: var(--text-primary); letter-spacing: -0.03em; }
         .account-balance.negative { color: var(--danger); }
-
-        /* Transfer section */
-        .transfer-card {
-            background: var(--bg-primary);
-            border-radius: var(--radius);
-            padding: 18px;
-            border: 1.5px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
-            margin-top: 4px;
-        }
-
-        .transfer-card-title {
-            font-size: 0.875rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 14px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .transfer-row {
-            display: grid;
-            grid-template-columns: 1fr 36px 1fr;
-            gap: 6px;
-            align-items: end;
-            margin-bottom: 12px;
-        }
-
-        .transfer-arrow-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 46px;
-            background: var(--transfer-light);
-            border-radius: var(--radius-sm);
-            color: var(--transfer);
-            font-size: 1rem;
-            font-weight: 700;
-        }
-
-        /* ── Analysis ────────────────────────────────────────────────────────── */
+        .transfer-card { background: var(--bg-primary); border-radius: var(--radius); padding: 18px; border: 1.5px solid var(--border-color); box-shadow: var(--shadow-sm); margin-top: 4px; }
+        .transfer-card-title { font-size: 0.875rem; font-weight: 700; color: var(--text-primary); margin-bottom: 14px; display: flex; align-items: center; gap: 6px; }
+        .transfer-row { display: grid; grid-template-columns: 1fr 36px 1fr; gap: 6px; align-items: end; margin-bottom: 12px; }
+        .transfer-arrow-btn { display: flex; align-items: center; justify-content: center; width: 36px; height: 46px; background: var(--transfer-light); border-radius: var(--radius-sm); color: var(--transfer); font-size: 1rem; font-weight: 700; }
         .analysis-content { padding: 0 16px 16px; }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin: 12px 0;
-        }
-
-        .stat-card {
-            background: var(--bg-primary);
-            padding: 14px 16px;
-            border-radius: var(--radius);
-            border: 1.5px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .stat-card .stat-label {
-            font-size: 0.7rem;
-            color: var(--text-tertiary);
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-            font-weight: 600;
-        }
-
-        .stat-card .stat-value {
-            font-size: 1.375rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            letter-spacing: -0.03em;
-        }
-
-        .chart-card {
-            background: var(--bg-primary);
-            border-radius: var(--radius);
-            padding: 18px;
-            margin-bottom: 10px;
-            border: 1.5px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .chart-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 14px;
-        }
-
-        .chart-card h3 {
-            font-size: 0.9375rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            letter-spacing: -0.01em;
-        }
-
-        /* Period filter pills */
-        .period-pills {
-            display: flex;
-            gap: 4px;
-            background: var(--bg-tertiary);
-            border-radius: 10px;
-            padding: 3px;
-            margin-bottom: 14px;
-        }
-
-        .period-pill {
-            flex: 1;
-            padding: 8px 6px;
-            border: none;
-            border-radius: 8px;
-            font-size: 0.8125rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            background: transparent;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: inherit;
-        }
-
-        .period-pill.active {
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            font-weight: 600;
-            box-shadow: var(--shadow-sm);
-        }
-
-        /* ── History ─────────────────────────────────────────────────────────── */
-        .history-content { padding: 0 16px 16px; }
-
-        .history-search {
-            position: relative;
-            margin: 12px 0 4px;
-        }
-
-        .history-search input {
-            padding-left: 38px;
-            font-size: 0.9rem;
-        }
-
-        .history-search .search-icon {
-            position: absolute;
-            left: 13px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-tertiary);
-            font-size: 0.875rem;
-            pointer-events: none;
-        }
-
-        .transaction-group-header {
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-            color: var(--text-tertiary);
-            padding: 12px 4px 6px;
-        }
-
-        .transaction-list {
-            background: var(--bg-primary);
-            border-radius: var(--radius);
-            overflow: hidden;
-            border: 1.5px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .transaction-item {
-            padding: 13px 14px;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: background 0.15s;
-        }
-
-        .transaction-item:last-child { border-bottom: none; }
-        .transaction-item:hover { background: var(--bg-secondary); }
-
-        .transaction-type-dot {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            flex-shrink: 0;
-        }
-
-        .transaction-type-dot.income { background: rgba(var(--success-rgb), 0.12); }
-        .transaction-type-dot.expense { background: rgba(var(--danger-rgb), 0.1); }
-        .transaction-type-dot.transfer { background: rgba(var(--transfer-rgb), 0.1); }
-
-        .transaction-info { flex: 1; min-width: 0; }
-
-        .transaction-category {
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--text-primary);
-            margin-bottom: 2px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .transaction-meta {
-            font-size: 0.775rem;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-
-        .transaction-account-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 3px;
-            font-size: 0.7rem;
-            padding: 1px 7px;
-            border-radius: 20px;
-            background: var(--bg-tertiary);
-            color: var(--text-secondary);
-            font-weight: 500;
-            border-left: 2px solid var(--account-color, var(--border-color));
-        }
-
-        .transaction-right {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 6px;
-        }
-
-        .transaction-amount {
-            font-size: 1rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-
-        .transaction-amount.income { color: var(--success); }
-        .transaction-amount.expense { color: var(--danger); }
-        .transaction-amount.transfer-out { color: var(--transfer); }
-        .transaction-amount.transfer-in { color: var(--transfer); }
-
-        .empty-state {
-            text-align: center;
-            padding: 64px 24px;
-            color: var(--text-tertiary);
-        }
-
-        .empty-state-icon {
-            font-size: 3rem;
-            margin-bottom: 12px;
-            opacity: 0.25;
-        }
-
-        .empty-state p { font-size: 0.9rem; }
-
-        /* ── Settings ────────────────────────────────────────────────────────── */
-        .settings-content { padding: 0 16px 16px; }
-
-        .settings-card {
-            background: var(--bg-primary);
-            border-radius: var(--radius);
-            border: 1.5px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
-            margin-bottom: 12px;
-            overflow: hidden;
-        }
-
-        .settings-card-header {
-            padding: 16px 18px 12px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .settings-card-header h3 {
-            font-size: 0.9375rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            letter-spacing: -0.01em;
-        }
-
-        .settings-card-header p {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            margin-top: 2px;
-        }
-
-        .settings-card-body { padding: 14px 18px; }
-
-        .theme-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-
-        .theme-option {
-            padding: 16px 12px;
-            background: var(--bg-tertiary);
-            border: 2px solid var(--border-color);
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            color: var(--text-secondary);
-            font-weight: 600;
-            font-size: 0.875rem;
-            font-family: inherit;
-        }
-
-        .theme-option:hover { border-color: var(--accent); color: var(--text-primary); }
-        .theme-option.active { background: var(--accent); border-color: var(--accent); color: white; box-shadow: var(--shadow-sm); }
-        .theme-icon { font-size: 1.5rem; }
-
-        .category-list { display: flex; flex-direction: column; gap: 6px; }
-
-        .category-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 11px 13px;
-            border: 1.5px solid var(--border-color);
-            border-radius: var(--radius-sm);
-            background: var(--bg-secondary);
-        }
-
-        .category-item-left { display: flex; align-items: center; gap: 10px; }
-
-        .category-type-badge {
-            font-size: 0.65rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 3px 7px;
-            border-radius: 20px;
-        }
-
-        .category-type-badge.income { background: rgba(var(--success-rgb), 0.12); color: var(--success); }
-        .category-type-badge.expense { background: rgba(var(--danger-rgb), 0.1); color: var(--danger); }
-
-        .category-name { font-weight: 600; font-size: 0.875rem; color: var(--text-primary); }
-
-        /* ── Budget ──────────────────────────────────────────────────────────── */
+        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 12px 0; }
+        .stat-card { background: var(--bg-primary); padding: 14px 16px; border-radius: var(--radius); border: 1.5px solid var(--border-color); box-shadow: var(--shadow-sm); }
+        .stat-card .stat-label { font-size: 0.7rem; color: var(--text-tertiary); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.6px; font-weight: 600; }
+        .stat-card .stat-value { font-size: 1.375rem; font-weight: 800; color: var(--text-primary); letter-spacing: -0.03em; }
+        .chart-card { background: var(--bg-primary); border-radius: var(--radius); padding: 18px; margin-bottom: 10px; border: 1.5px solid var(--border-color); box-shadow: var(--shadow-sm); }
+        .chart-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+        .chart-card h3 { font-size: 0.9375rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.01em; }
+        .period-pills { display: flex; gap: 4px; background: var(--bg-tertiary); border-radius: 10px; padding: 3px; margin-bottom: 14px; }
+        .period-pill { flex: 1; padding: 8px 6px; border: none; border-radius: 8px; font-size: 0.8125rem; font-weight: 500; color: var(--text-secondary); background: transparent; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+        .period-pill.active { background: var(--bg-primary); color: var(--text-primary); font-weight: 600; box-shadow: var(--shadow-sm); }
+        /* Chart toggle pills */
+        .chart-toggle { display: flex; gap: 4px; background: var(--bg-tertiary); border-radius: 8px; padding: 3px; }
+        .chart-toggle-btn { flex: 1; padding: 5px 8px; border: none; border-radius: 6px; font-size: 0.75rem; font-weight: 500; color: var(--text-secondary); background: transparent; cursor: pointer; transition: all 0.2s; font-family: inherit; white-space: nowrap; }
+        .chart-toggle-btn.active { background: var(--bg-primary); color: var(--text-primary); font-weight: 600; box-shadow: var(--shadow-sm); }
+        /* Weekly ring donut center text */
+        .donut-wrap { position: relative; }
+        .donut-center-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; pointer-events: none; }
+        .donut-center-text .dct-amount { font-size: 1.25rem; font-weight: 800; color: var(--text-primary); letter-spacing: -0.03em; display: block; }
+        .donut-center-text .dct-pct { font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); display: block; margin-top: 2px; }
+        .donut-center-text .dct-label { font-size: 0.65rem; color: var(--text-tertiary); display: block; text-transform: uppercase; letter-spacing: 0.5px; }
+        /* Budget item clickable */
         .budget-item {
-            padding: 14px;
-            background: var(--bg-secondary);
-            border-radius: var(--radius-sm);
-            border: 1.5px solid var(--border-color);
-            margin-bottom: 8px;
+            padding: 14px; background: var(--bg-secondary); border-radius: var(--radius-sm); border: 1.5px solid var(--border-color); margin-bottom: 8px; cursor: pointer; transition: background 0.15s, border-color 0.15s, box-shadow 0.15s, opacity 0.15s; position: relative; user-select: none;
         }
-
+        .budget-item:hover { border-color: var(--accent); box-shadow: var(--shadow-sm); }
         .budget-item:last-child { margin-bottom: 0; }
-
+        .budget-item.dragging { opacity: 0.4; border-style: dashed; }
+        .budget-item.drag-over { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(var(--accent-rgb),0.25); background: rgba(var(--accent-rgb),0.05); }
+        .budget-drag-handle {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 24px; height: 24px; margin-right: 6px;
+            color: var(--text-tertiary); font-size: 1rem; cursor: grab; flex-shrink: 0;
+            touch-action: none;
+        }
         .budget-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
         .budget-category { font-weight: 700; font-size: 0.875rem; color: var(--text-primary); }
         .budget-amount-label { font-size: 0.775rem; color: var(--text-secondary); }
-
-        .budget-bar-track {
-            width: 100%;
-            height: 6px;
-            background: var(--bg-tertiary);
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .budget-bar-fill {
-            height: 100%;
-            border-radius: 3px;
-            transition: width 0.4s ease;
-        }
-
+        .budget-bar-track { width: 100%; height: 6px; background: var(--bg-tertiary); border-radius: 3px; overflow: hidden; }
+        .budget-bar-fill { height: 100%; border-radius: 3px; transition: width 0.4s ease; }
         .budget-bar-fill.ok { background: var(--success); }
         .budget-bar-fill.warn { background: var(--warning); }
         .budget-bar-fill.over { background: var(--danger); }
-
         .budget-footer { display: flex; justify-content: space-between; margin-top: 6px; font-size: 0.75rem; }
         .budget-spent-label { color: var(--text-secondary); }
         .budget-remaining-label { font-weight: 700; }
         .budget-remaining-label.ok { color: var(--success); }
         .budget-remaining-label.warn { color: var(--warning); }
         .budget-remaining-label.over { color: var(--danger); }
-
-        /* ── Bottom nav ──────────────────────────────────────────────────────── */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0; left: 0; right: 0;
-            background: var(--bg-primary);
-            border-top: 1px solid var(--border-color);
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            padding: 6px 0 calc(6px + env(safe-area-inset-bottom));
-            z-index: 100;
-            box-shadow: 0 -1px 0 var(--border-color);
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 6px 4px;
-            color: var(--text-tertiary);
-            cursor: pointer;
-            transition: color 0.2s;
-            border: none;
-            background: transparent;
-            font-size: 0.675rem;
-            font-weight: 600;
-            font-family: inherit;
-            gap: 3px;
-        }
-
+        .history-content { padding: 0 16px 16px; }
+        .history-search { position: relative; margin: 12px 0 4px; }
+        .history-search input { padding-left: 38px; font-size: 0.9rem; }
+        .history-search .search-icon { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: var(--text-tertiary); font-size: 0.875rem; pointer-events: none; }
+        .transaction-group-header { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-tertiary); padding: 12px 4px 6px; }
+        .transaction-list { background: var(--bg-primary); border-radius: var(--radius); overflow: hidden; border: 1.5px solid var(--border-color); box-shadow: var(--shadow-sm); }
+        .transaction-item { padding: 13px 14px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; gap: 12px; transition: background 0.15s; }
+        .transaction-item:last-child { border-bottom: none; }
+        .transaction-item:hover { background: var(--bg-secondary); }
+        .transaction-type-dot { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+        .transaction-type-dot.income { background: rgba(var(--success-rgb), 0.12); }
+        .transaction-type-dot.expense { background: rgba(var(--danger-rgb), 0.1); }
+        .transaction-type-dot.transfer { background: rgba(var(--transfer-rgb), 0.1); }
+        .transaction-info { flex: 1; min-width: 0; }
+        .transaction-category { font-weight: 600; font-size: 0.9rem; color: var(--text-primary); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .transaction-meta { font-size: 0.775rem; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+        .transaction-account-pill { display: inline-flex; align-items: center; gap: 3px; font-size: 0.7rem; padding: 1px 7px; border-radius: 20px; background: var(--bg-tertiary); color: var(--text-secondary); font-weight: 500; border-left: 2px solid var(--account-color, var(--border-color)); }
+        .transaction-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+        .transaction-amount { font-size: 1rem; font-weight: 700; letter-spacing: -0.02em; }
+        .transaction-amount.income { color: var(--success); }
+        .transaction-amount.expense { color: var(--danger); }
+        .transaction-amount.transfer-out { color: var(--transfer); }
+        .transaction-amount.transfer-in { color: var(--transfer); }
+        .empty-state { text-align: center; padding: 64px 24px; color: var(--text-tertiary); }
+        .empty-state-icon { font-size: 3rem; margin-bottom: 12px; opacity: 0.25; }
+        .empty-state p { font-size: 0.9rem; }
+        .settings-content { padding: 0 16px 16px; }
+        .settings-card { background: var(--bg-primary); border-radius: var(--radius); border: 1.5px solid var(--border-color); box-shadow: var(--shadow-sm); margin-bottom: 12px; overflow: hidden; }
+        .settings-card-header { padding: 16px 18px 12px; border-bottom: 1px solid var(--border-color); }
+        .settings-card-header h3 { font-size: 0.9375rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.01em; }
+        .settings-card-header p { font-size: 0.8rem; color: var(--text-secondary); margin-top: 2px; }
+        .settings-card-body { padding: 14px 18px; }
+        .theme-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .theme-option { padding: 16px 12px; background: var(--bg-tertiary); border: 2px solid var(--border-color); border-radius: var(--radius-sm); cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--text-secondary); font-weight: 600; font-size: 0.875rem; font-family: inherit; }
+        .theme-option:hover { border-color: var(--accent); color: var(--text-primary); }
+        .theme-option.active { background: var(--accent); border-color: var(--accent); color: white; box-shadow: var(--shadow-sm); }
+        .theme-icon { font-size: 1.5rem; }
+        /* Category drag handles */
+        .category-list { display: flex; flex-direction: column; gap: 6px; }
+        .category-item { display: flex; align-items: center; justify-content: space-between; padding: 11px 13px; border: 1.5px solid var(--border-color); border-radius: var(--radius-sm); background: var(--bg-secondary); transition: box-shadow 0.15s; }
+        .category-item.dragging { opacity: 0.5; box-shadow: var(--shadow-md); }
+        .category-item.drag-over { border-color: var(--accent); background: rgba(var(--accent-rgb), 0.05); }
+        .category-item-left { display: flex; align-items: center; gap: 10px; }
+        .drag-handle { font-size: 1.1rem; color: var(--text-tertiary); cursor: grab; padding: 2px 4px; touch-action: none; user-select: none; }
+        .drag-handle:active { cursor: grabbing; }
+        .category-type-badge { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 3px 7px; border-radius: 20px; }
+        .category-type-badge.income { background: rgba(var(--success-rgb), 0.12); color: var(--success); }
+        .category-type-badge.expense { background: rgba(var(--danger-rgb), 0.1); color: var(--danger); }
+        .category-name { font-weight: 600; font-size: 0.875rem; color: var(--text-primary); }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg-primary); border-top: 1px solid var(--border-color); display: grid; grid-template-columns: repeat(5, 1fr); padding: 6px 0 calc(6px + env(safe-area-inset-bottom)); z-index: 100; box-shadow: 0 -1px 0 var(--border-color); }
+        .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6px 4px; color: var(--text-tertiary); cursor: pointer; transition: color 0.2s; border: none; background: transparent; font-size: 0.675rem; font-weight: 600; font-family: inherit; gap: 3px; }
         .nav-item.active { color: var(--accent); }
-
-        .nav-icon-wrap {
-            width: 44px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            transition: background 0.2s;
-        }
-
-        .nav-item.active .nav-icon-wrap {
-            background: rgba(var(--accent-rgb), 0.1);
-        }
-
+        .nav-icon-wrap { width: 44px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 10px; transition: background 0.2s; }
+        .nav-item.active .nav-icon-wrap { background: rgba(var(--accent-rgb), 0.1); }
         .nav-icon { font-size: 1.25rem; line-height: 1; }
-
-        /* ── Modals ──────────────────────────────────────────────────────────── */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.45);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            z-index: 1000;
-            align-items: flex-end;
-            justify-content: center;
-            padding: 0;
-        }
-
-        @media (min-width: 480px) {
-            .modal { align-items: center; padding: 20px; }
-            .modal-content { border-radius: var(--radius) !important; }
-        }
-
+        .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.45); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index: 1000; align-items: flex-end; justify-content: center; padding: 0; }
+        @media (min-width: 480px) { .modal { align-items: center; padding: 20px; } .modal-content { border-radius: var(--radius) !important; } }
         .modal.active { display: flex; animation: modalIn 0.2s ease; }
-
-        @keyframes modalIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .modal-content {
-            background: var(--bg-primary);
-            border-radius: var(--radius) var(--radius) 0 0;
-            padding: 0;
-            max-width: 480px;
-            width: 100%;
-            box-shadow: var(--shadow-lg);
-            max-height: 90vh;
-            overflow-y: auto;
-            animation: sheetUp 0.25s ease;
-        }
-
-        @keyframes sheetUp {
-            from { transform: translateY(20px); opacity: 0.8; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .modal-handle {
-            width: 36px; height: 4px;
-            background: var(--border-color);
-            border-radius: 2px;
-            margin: 10px auto 0;
-        }
-
-        .modal-header {
-            padding: 14px 20px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-title {
-            font-size: 1.125rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            letter-spacing: -0.02em;
-        }
-
-        .modal-close {
-            width: 28px; height: 28px;
-            border-radius: 50%;
-            background: var(--bg-tertiary);
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            font-size: 1rem;
-            font-family: inherit;
-        }
-
+        @keyframes modalIn { from { opacity: 0; } to { opacity: 1; } }
+        .modal-content { background: var(--bg-primary); border-radius: var(--radius) var(--radius) 0 0; padding: 0; max-width: 480px; width: 100%; box-shadow: var(--shadow-lg); max-height: 90vh; overflow-y: auto; animation: sheetUp 0.25s ease; }
+        @keyframes sheetUp { from { transform: translateY(20px); opacity: 0.8; } to { transform: translateY(0); opacity: 1; } }
+        .modal-handle { width: 36px; height: 4px; background: var(--border-color); border-radius: 2px; margin: 10px auto 0; }
+        .modal-header { padding: 14px 20px 0; display: flex; justify-content: space-between; align-items: center; }
+        .modal-title { font-size: 1.125rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.02em; }
+        .modal-close { width: 28px; height: 28px; border-radius: 50%; background: var(--bg-tertiary); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); font-size: 1rem; font-family: inherit; }
         .modal-body { padding: 16px 20px; }
-
-        .modal-footer {
-            padding: 0 20px 20px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn-modal-cancel {
-            flex: 1;
-            padding: 13px;
-            background: var(--bg-tertiary);
-            border: 1.5px solid var(--border-color);
-            border-radius: var(--radius-sm);
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            color: var(--text-primary);
-            font-family: inherit;
-            transition: background 0.15s;
-        }
-
+        .modal-footer { padding: 0 20px 20px; display: flex; gap: 10px; }
+        .btn-modal-cancel { flex: 1; padding: 13px; background: var(--bg-tertiary); border: 1.5px solid var(--border-color); border-radius: var(--radius-sm); font-size: 0.9rem; font-weight: 600; cursor: pointer; color: var(--text-primary); font-family: inherit; transition: background 0.15s; }
         .btn-modal-cancel:hover { background: var(--bg-secondary); }
-
-        .btn-modal-confirm {
-            flex: 2;
-            padding: 13px;
-            background: var(--accent);
-            color: white;
-            border: none;
-            border-radius: var(--radius-sm);
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            font-family: inherit;
-            transition: filter 0.15s;
-        }
-
+        .btn-modal-confirm { flex: 2; padding: 13px; background: var(--accent); color: white; border: none; border-radius: var(--radius-sm); font-size: 0.9rem; font-weight: 600; cursor: pointer; font-family: inherit; transition: filter 0.15s; }
         .btn-modal-confirm:hover { filter: brightness(1.08); }
         .btn-modal-confirm:active { transform: scale(0.98); }
-
-        /* Account type picker */
-        .account-type-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-        }
-
-        .account-type-tile {
-            padding: 12px 8px;
-            border: 2px solid var(--border-color);
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            text-align: center;
-            font-size: 0.775rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            background: var(--bg-tertiary);
-            transition: all 0.15s;
-        }
-
+        .account-type-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .account-type-tile { padding: 12px 8px; border: 2px solid var(--border-color); border-radius: var(--radius-sm); cursor: pointer; text-align: center; font-size: 0.775rem; font-weight: 600; color: var(--text-secondary); background: var(--bg-tertiary); transition: all 0.15s; }
         .account-type-tile:hover { border-color: var(--accent); color: var(--text-primary); }
-
-        .account-type-tile.selected {
-            border-color: var(--accent);
-            background: rgba(var(--accent-rgb), 0.08);
-            color: var(--accent);
-        }
-
+        .account-type-tile.selected { border-color: var(--accent); background: rgba(var(--accent-rgb), 0.08); color: var(--accent); }
         .account-type-tile-icon { font-size: 1.375rem; display: block; margin-bottom: 4px; }
-
-        /* Color picker */
-        .color-row {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .color-swatch {
-            width: 30px; height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 3px solid transparent;
-            outline: 2px solid transparent;
-            transition: all 0.15s;
-        }
-
-        .color-swatch.selected {
-            outline-color: var(--text-primary);
-            outline-offset: 2px;
-            transform: scale(1.1);
-        }
-
-        /* Dividers */
-        .divider {
-            height: 1px;
-            background: var(--border-color);
-            margin: 4px 0;
-        }
-
-        /* Toast notification */
+        .color-row { display: flex; gap: 8px; flex-wrap: wrap; }
+        .color-swatch { width: 30px; height: 30px; border-radius: 50%; cursor: pointer; border: 3px solid transparent; outline: 2px solid transparent; transition: all 0.15s; }
+        .color-swatch.selected { outline-color: var(--text-primary); outline-offset: 2px; transform: scale(1.1); }
+        .divider { height: 1px; background: var(--border-color); margin: 4px 0; }
+        /* Toast - colored */
         .toast {
             position: fixed;
             bottom: 90px;
             left: 50%;
             transform: translateX(-50%) translateY(10px);
-            background: var(--text-primary);
-            color: var(--bg-primary);
             padding: 10px 18px;
             border-radius: 20px;
             font-size: 0.875rem;
@@ -1129,24 +396,29 @@
             transition: all 0.25s;
             white-space: nowrap;
             pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            box-shadow: var(--shadow-md);
         }
-
         .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-        @media (max-width: 480px) {
-            .stats-grid { grid-template-columns: 1fr 1fr; }
-        }
-
-        @media (max-width: 360px) {
-            .accounts-grid { grid-template-columns: 1fr; }
-            .stats-grid { grid-template-columns: 1fr; }
-        }
+        .toast.toast-income { background: var(--success); color: white; }
+        .toast.toast-expense { background: var(--danger); color: white; }
+        .toast.toast-default { background: var(--text-primary); color: var(--bg-primary); }
+        /* Category transactions modal */
+        .cat-tx-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border-color); }
+        .cat-tx-item:last-child { border-bottom: none; }
+        .cat-tx-left { display: flex; flex-direction: column; gap: 2px; }
+        .cat-tx-date { font-size: 0.75rem; color: var(--text-secondary); }
+        .cat-tx-desc { font-size: 0.825rem; color: var(--text-primary); font-weight: 500; }
+        .cat-tx-amount { font-weight: 700; font-size: 0.95rem; }
+        @media (max-width: 480px) { .stats-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 360px) { .accounts-grid { grid-template-columns: 1fr; } .stats-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 <div class="app-container">
-
-    <!-- ── Header ─────────────────────────────────────────────────────────── -->
+    <!-- Header -->
     <div class="header">
         <div class="header-top">
             <span class="header-title">Finance</span>
@@ -1158,24 +430,13 @@
             <button class="header-filter-btn" data-hfilter="week">This week</button>
         </div>
         <div class="mini-indicators">
-            <div class="mini-indicator balance">
-                <div class="label">Balance</div>
-                <div class="value" id="miniBalance">$0</div>
-            </div>
-            <div class="mini-indicator income">
-                <div class="label">Income</div>
-                <div class="value" id="miniIncome">$0</div>
-            </div>
-            <div class="mini-indicator expense">
-                <div class="label">Expenses</div>
-                <div class="value" id="miniExpense">$0</div>
-            </div>
+            <div class="mini-indicator balance"><div class="label">Balance</div><div class="value" id="miniBalance">$0</div></div>
+            <div class="mini-indicator income"><div class="label">Income</div><div class="value" id="miniIncome">$0</div></div>
+            <div class="mini-indicator expense"><div class="label">Expenses</div><div class="value" id="miniExpense">$0</div></div>
         </div>
     </div>
-
     <div class="main-content">
-
-        <!-- ── Register ───────────────────────────────────────────────────── -->
+        <!-- Register -->
         <section id="registerSection" class="section active">
             <div class="register-content">
                 <div class="card card-padded" style="margin-top: 12px;">
@@ -1183,102 +444,70 @@
                         <div class="form-group">
                             <label for="amount">Amount</label>
                             <div class="amount-input-wrap">
-                                <span class="currency-prefix">$</span>
-                                <input type="number" id="amount" step="0.01" min="0.01" required placeholder="0.00" autocomplete="off">
+                                <span class="currency-prefix" id="amountCurrencyPrefix">$</span>
+                                <input type="number" id="amount" inputmode="decimal" pattern="[0-9]*" step="0.01" min="0.01" required placeholder="0.00" autocomplete="off" style="padding-left:32px;font-size:1.5rem;font-weight:700;letter-spacing:-0.02em;">
                             </div>
                         </div>
-
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="category">Category</label>
-                                <select id="category" required>
-                                    <option value="">Select…</option>
-                                </select>
+                                <select id="category" required><option value="">Select…</option></select>
                             </div>
                             <div class="form-group">
                                 <label for="accountSelect">Account</label>
-                                <select id="accountSelect">
-                                    <option value="">No account</option>
-                                </select>
+                                <select id="accountSelect"><option value="">No account</option></select>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="date">Date</label>
-                            <input type="date" id="date" required>
-                        </div>
-
                         <div class="form-group">
                             <label for="description">Note <span style="font-weight:400;color:var(--text-tertiary)">(optional)</span></label>
                             <textarea id="description" rows="2" placeholder="Add a note…"></textarea>
                         </div>
-
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" id="date" required>
+                        </div>
                         <div class="action-buttons">
-                            <button type="button" class="btn-income" id="btnIncome">
-                                <span style="font-size:1.1rem;">↑</span> Income
-                            </button>
-                            <button type="button" class="btn-expense" id="btnExpense">
-                                <span style="font-size:1.1rem;">↓</span> Expense
-                            </button>
+                            <button type="button" class="btn-expense" id="btnExpense"><span style="font-size:1.1rem;">↓</span> Expense</button>
+                            <button type="button" class="btn-income" id="btnIncome"><span style="font-size:1.1rem;">↑</span> Income</button>
                         </div>
                     </form>
                 </div>
             </div>
         </section>
-
-        <!-- ── Accounts ───────────────────────────────────────────────────── -->
+        <!-- Accounts -->
         <section id="accountsSection" class="section">
             <div class="accounts-content">
                 <div class="total-balance-card">
                     <div class="tbc-label">Total Balance</div>
                     <div class="tbc-amount" id="totalBalanceDisplay">$0.00</div>
                     <div class="tbc-sub" id="totalAccountsSubtitle">0 accounts</div>
+                    <div id="currencyBreakdown" style="margin-top:10px;display:none;"></div>
                 </div>
-
                 <div class="section-label" style="padding: 8px 0 6px;">My Accounts</div>
                 <div class="accounts-grid" id="accountsGrid">
-                    <div style="grid-column:1/-1;" class="empty-state">
-                        <div class="empty-state-icon">🏦</div>
-                        <p>No accounts yet</p>
-                    </div>
+                    <div style="grid-column:1/-1;" class="empty-state"><div class="empty-state-icon">🏦</div><p>No accounts yet</p></div>
                 </div>
-
-                <button class="btn-secondary" id="btnAddAccount" style="margin-top: 4px;">
-                    <span>＋</span> Add Account
-                </button>
-
+                <button class="btn-secondary" id="btnAddAccount" style="margin-top: 4px;"><span>＋</span> Add Account</button>
                 <div class="section-label" style="padding: 18px 0 6px;">Transfer Between Accounts</div>
                 <div class="transfer-card">
                     <div class="transfer-row">
-                        <div class="form-group" style="margin:0;">
-                            <label>From</label>
-                            <select id="transferFrom"><option value="">Select account</option></select>
-                        </div>
+                        <div class="form-group" style="margin:0;"><label>From</label><select id="transferFrom"><option value="">Select account</option></select></div>
                         <div class="transfer-arrow-btn">⇄</div>
-                        <div class="form-group" style="margin:0;">
-                            <label>To</label>
-                            <select id="transferTo"><option value="">Select account</option></select>
-                        </div>
+                        <div class="form-group" style="margin:0;"><label>To</label><select id="transferTo"><option value="">Select account</option></select></div>
                     </div>
                     <div class="form-group" style="margin-bottom: 12px;">
                         <label>Amount</label>
-                        <div class="amount-input-wrap">
-                            <span class="currency-prefix">$</span>
-                            <input type="number" id="transferAmount" step="0.01" placeholder="0.00">
-                        </div>
+                        <div class="amount-input-wrap"><span class="currency-prefix">$</span><input type="number" id="transferAmount" inputmode="decimal" step="0.01" placeholder="0.00"></div>
                     </div>
                     <div class="form-group" style="margin-bottom: 14px;">
                         <label>Description <span style="font-weight:400;color:var(--text-tertiary)">(optional)</span></label>
                         <input type="text" id="transferDescription" placeholder="e.g. Move funds to MX bank">
                     </div>
-                    <button type="button" class="btn-transfer" id="btnDoTransfer" style="width:100%;">
-                        <span>⇄</span> Transfer Funds
-                    </button>
+                    <button type="button" class="btn-transfer" id="btnDoTransfer" style="width:100%;"><span>⇄</span> Transfer Funds</button>
                 </div>
             </div>
         </section>
-
-        <!-- ── Analysis ───────────────────────────────────────────────────── -->
+        <!-- Analysis -->
         <section id="analysisSection" class="section">
             <div class="analysis-content">
                 <div class="card card-padded" style="margin-top: 12px;">
@@ -1290,38 +519,35 @@
                     </div>
                     <div id="customDateFilter" style="display:none;">
                         <div class="form-row">
-                            <div class="form-group" style="margin-bottom:0;">
-                                <label>From</label>
-                                <input type="date" id="filterStartDate">
-                            </div>
-                            <div class="form-group" style="margin-bottom:0;">
-                                <label>To</label>
-                                <input type="date" id="filterEndDate">
-                            </div>
+                            <div class="form-group" style="margin-bottom:0;"><label>From</label><input type="date" id="filterStartDate"></div>
+                            <div class="form-group" style="margin-bottom:0;"><label>To</label><input type="date" id="filterEndDate"></div>
                         </div>
                         <button class="btn-secondary" id="applyDateFilter" style="margin-top: 10px;">Apply Filter</button>
                     </div>
                 </div>
-
                 <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-label">Net Balance</div>
-                        <div class="stat-value" id="statBalance">$0</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">Transactions</div>
-                        <div class="stat-value" id="statCount">0</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">Total Income</div>
-                        <div class="stat-value" style="color:var(--success);" id="statIncome">$0</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">Total Expenses</div>
-                        <div class="stat-value" style="color:var(--danger);" id="statExpense">$0</div>
-                    </div>
+                    <div class="stat-card"><div class="stat-label">Net Balance</div><div class="stat-value" id="statBalance">$0</div></div>
+                    <div class="stat-card"><div class="stat-label">Transactions</div><div class="stat-value" id="statCount">0</div></div>
+                    <div class="stat-card"><div class="stat-label">Total Income</div><div class="stat-value" style="color:var(--success);" id="statIncome">$0</div></div>
+                    <div class="stat-card"><div class="stat-label">Total Expenses</div><div class="stat-value" style="color:var(--danger);" id="statExpense">$0</div></div>
                 </div>
-
+                <!-- Weekly salary ring chart -->
+                <div class="chart-card">
+                    <div class="chart-card-header">
+                        <h3>Weekly Budget</h3>
+                        <span id="weekRangeLabel" style="font-size:0.75rem;color:var(--text-secondary);"></span>
+                    </div>
+                    <div class="donut-wrap" style="max-width:220px;margin:0 auto;position:relative;">
+                        <canvas id="weeklyRingChart"></canvas>
+                        <div class="donut-center-text" id="weeklyRingCenter">
+                            <span class="dct-label">Remaining</span>
+                            <span class="dct-amount" id="weeklyRingAmount">—</span>
+                            <span class="dct-pct" id="weeklyRingPct">Set salary →</span>
+                        </div>
+                    </div>
+                    <div style="margin-top:12px;display:flex;justify-content:center;gap:16px;font-size:0.8rem;color:var(--text-secondary);" id="weeklyRingLegend"></div>
+                </div>
+                <!-- Budgets -->
                 <div class="chart-card">
                     <div class="chart-card-header">
                         <h3>Budgets</h3>
@@ -1329,24 +555,20 @@
                     </div>
                     <div id="budgetList"></div>
                 </div>
-
+                <!-- Bar chart with toggle -->
                 <div class="chart-card">
                     <div class="chart-card-header">
-                        <h3>By Category</h3>
+                        <h3 id="barChartTitle">By Category</h3>
+                        <div class="chart-toggle">
+                            <button class="chart-toggle-btn active" data-view="category" id="toggleCategory">By Category</button>
+                            <button class="chart-toggle-btn" data-view="monthly" id="toggleMonthly">Monthly Trend</button>
+                        </div>
                     </div>
-                    <canvas id="categoryChart"></canvas>
-                </div>
-
-                <div class="chart-card">
-                    <div class="chart-card-header">
-                        <h3>Monthly Trend</h3>
-                    </div>
-                    <canvas id="trendChart"></canvas>
+                    <canvas id="barChart"></canvas>
                 </div>
             </div>
         </section>
-
-        <!-- ── History ────────────────────────────────────────────────────── -->
+        <!-- History -->
         <section id="historySection" class="section">
             <div class="history-content">
                 <div class="history-search">
@@ -1356,92 +578,72 @@
                 <div id="transactionList" style="margin-top: 8px;"></div>
             </div>
         </section>
-
-        <!-- ── Settings ───────────────────────────────────────────────────── -->
+        <!-- Settings -->
         <section id="settingsSection" class="section">
             <div class="settings-content" style="padding-top: 12px;">
-
                 <div class="settings-card">
-                    <div class="settings-card-header">
-                        <h3>Appearance</h3>
-                        <p>Customize the app theme</p>
-                    </div>
+                    <div class="settings-card-header"><h3>Appearance</h3><p>Customize the app theme</p></div>
                     <div class="settings-card-body">
                         <div class="theme-toggle">
-                            <button class="theme-option active" data-theme="light" id="themeLight">
-                                <span class="theme-icon">☀️</span> Light
-                            </button>
-                            <button class="theme-option" data-theme="dark" id="themeDark">
-                                <span class="theme-icon">🌙</span> Dark
-                            </button>
+                            <button class="theme-option active" data-theme="light" id="themeLight"><span class="theme-icon">☀️</span> Light</button>
+                            <button class="theme-option" data-theme="dark" id="themeDark"><span class="theme-icon">🌙</span> Dark</button>
                         </div>
                     </div>
                 </div>
-
                 <div class="settings-card">
-                    <div class="settings-card-header">
-                        <h3>Categories</h3>
-                        <p>Manage income and expense categories</p>
+                    <div class="settings-card-header"><h3>Exchange Rate</h3><p>Reference rate for total balance in USD (MXN → USD)</p></div>
+                    <div class="settings-card-body">
+                        <div class="form-group" style="margin-bottom:0;">
+                            <label for="exchangeRateInput">1 USD = ? MXN</label>
+                            <input type="number" id="exchangeRateInput" inputmode="decimal" step="0.01" min="1" placeholder="e.g. 17.50">
+                        </div>
+                        <button class="btn-secondary" id="btnSaveExchangeRate" style="margin-top:10px;">Save Rate</button>
+                        <p style="font-size:0.75rem;color:var(--text-tertiary);margin-top:8px;">Used only as a reference for total balance display. Actual account values are not converted.</p>
                     </div>
+                </div>
+                <div class="settings-card">
+                    <div class="settings-card-header"><h3>Weekly Salary</h3><p>Used for the weekly budget ring chart</p></div>
+                    <div class="settings-card-body">
+                        <div class="form-group" style="margin-bottom:0;">
+                            <label for="weeklySalaryInput">Weekly salary / income goal ($)</label>
+                            <div class="amount-input-wrap">
+                                <span class="currency-prefix">$</span>
+                                <input type="number" id="weeklySalaryInput" step="0.01" min="0" placeholder="e.g. 500.00" style="padding-left:32px;">
+                            </div>
+                        </div>
+                        <button class="btn-secondary" id="btnSaveWeeklySalary" style="margin-top:10px;">Save Salary</button>
+                    </div>
+                </div>
+                <div class="settings-card">
+                    <div class="settings-card-header"><h3>Categories</h3><p>Manage and reorder categories</p></div>
                     <div class="settings-card-body">
                         <button class="btn-secondary" id="btnAddCategory">＋ Add category</button>
                         <div class="category-list" id="categoryList" style="margin-top: 12px;"></div>
                     </div>
                 </div>
-
             </div>
         </section>
     </div>
-
-    <!-- ── Bottom Nav ─────────────────────────────────────────────────────── -->
+    <!-- Bottom Nav -->
     <nav class="bottom-nav">
-        <button class="nav-item active" data-section="registerSection">
-            <div class="nav-icon-wrap"><span class="nav-icon">＋</span></div>
-            Register
-        </button>
-        <button class="nav-item" data-section="accountsSection">
-            <div class="nav-icon-wrap"><span class="nav-icon">🏦</span></div>
-            Accounts
-        </button>
-        <button class="nav-item" data-section="analysisSection">
-            <div class="nav-icon-wrap"><span class="nav-icon">📊</span></div>
-            Analysis
-        </button>
-        <button class="nav-item" data-section="historySection">
-            <div class="nav-icon-wrap"><span class="nav-icon">📋</span></div>
-            History
-        </button>
-        <button class="nav-item" data-section="settingsSection">
-            <div class="nav-icon-wrap"><span class="nav-icon">⚙️</span></div>
-            Settings
-        </button>
+        <button class="nav-item active" data-section="registerSection"><div class="nav-icon-wrap"><span class="nav-icon">＋</span></div>Register</button>
+        <button class="nav-item" data-section="accountsSection"><div class="nav-icon-wrap"><span class="nav-icon">🏦</span></div>Accounts</button>
+        <button class="nav-item" data-section="analysisSection"><div class="nav-icon-wrap"><span class="nav-icon">📊</span></div>Analysis</button>
+        <button class="nav-item" data-section="historySection"><div class="nav-icon-wrap"><span class="nav-icon">📋</span></div>History</button>
+        <button class="nav-item" data-section="settingsSection"><div class="nav-icon-wrap"><span class="nav-icon">⚙️</span></div>Settings</button>
     </nav>
 </div>
-
 <!-- Toast -->
 <div class="toast" id="toast"></div>
-
-<!-- ── Modal: Category ──────────────────────────────────────────────────── -->
+<!-- Modal: Category -->
 <div class="modal" id="categoryModal">
     <div class="modal-content">
         <div class="modal-handle"></div>
-        <div class="modal-header">
-            <span class="modal-title">New Category</span>
-            <button class="modal-close" id="btnCancelCategory">✕</button>
-        </div>
+        <div class="modal-header"><span class="modal-title">New Category</span><button class="modal-close" id="btnCancelCategory">✕</button></div>
         <form id="categoryForm">
             <div class="modal-body">
-                <div class="form-group">
-                    <label for="categoryName">Name</label>
-                    <input type="text" id="categoryName" required placeholder="e.g. Restaurants">
-                </div>
-                <div class="form-group" style="margin-bottom:0;">
-                    <label for="categoryType">Type</label>
-                    <select id="categoryType" required>
-                        <option value="expense">Expense</option>
-                        <option value="income">Income</option>
-                    </select>
-                </div>
+                <div class="form-group"><label for="categoryName">Name</label><input type="text" id="categoryName" required placeholder="e.g. Restaurants"></div>
+                <div class="form-group" style="margin-bottom:0;"><label for="categoryType">Type</label><select id="categoryType" required><option value="expense">Expense</option><option value="income">Income</option></select></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn-modal-cancel" id="btnCancelCategory2">Cancel</button>
@@ -1450,49 +652,24 @@
         </form>
     </div>
 </div>
-
-<!-- ── Modal: Budget list ────────────────────────────────────────────────── -->
+<!-- Modal: Budget list -->
 <div class="modal" id="budgetModal">
     <div class="modal-content">
         <div class="modal-handle"></div>
-        <div class="modal-header">
-            <span class="modal-title">Manage Budgets</span>
-            <button class="modal-close" id="btnCloseBudget">✕</button>
-        </div>
-        <div class="modal-body" style="max-height: 60vh; overflow-y: auto;">
-            <div id="budgetManageList"></div>
-        </div>
+        <div class="modal-header"><span class="modal-title">Manage Budgets</span><button class="modal-close" id="btnCloseBudget">✕</button></div>
+        <div class="modal-body" style="max-height: 60vh; overflow-y: auto;"><div id="budgetManageList"></div></div>
     </div>
 </div>
-
-<!-- ── Modal: Set budget ─────────────────────────────────────────────────── -->
+<!-- Modal: Set budget -->
 <div class="modal" id="setBudgetModal">
     <div class="modal-content">
         <div class="modal-handle"></div>
-        <div class="modal-header">
-            <span class="modal-title">Set Budget</span>
-            <button class="modal-close" id="btnCancelBudget">✕</button>
-        </div>
+        <div class="modal-header"><span class="modal-title">Set Budget</span><button class="modal-close" id="btnCancelBudget">✕</button></div>
         <form id="setBudgetForm">
             <div class="modal-body">
-                <div class="form-group">
-                    <label>Category: <strong id="budgetCategoryName"></strong></label>
-                </div>
-                <div class="form-group">
-                    <label for="budgetAmount">Budget amount</label>
-                    <div class="amount-input-wrap">
-                        <span class="currency-prefix">$</span>
-                        <input type="number" id="budgetAmount" step="0.01" required placeholder="0.00">
-                    </div>
-                </div>
-                <div class="form-group" style="margin-bottom:0;">
-                    <label for="budgetPeriod">Period</label>
-                    <select id="budgetPeriod" required>
-                        <option value="monthly">Monthly</option>
-                        <option value="weekly">Weekly</option>
-                        <option value="daily">Daily</option>
-                    </select>
-                </div>
+                <div class="form-group"><label>Category: <strong id="budgetCategoryName"></strong></label></div>
+                <div class="form-group"><label for="budgetAmount">Budget amount</label><div class="amount-input-wrap"><span class="currency-prefix">$</span><input type="number" id="budgetAmount" inputmode="decimal" step="0.01" required placeholder="0.00"></div></div>
+                <div class="form-group" style="margin-bottom:0;"><label for="budgetPeriod">Period</label><select id="budgetPeriod" required><option value="monthly">Monthly</option><option value="weekly">Weekly</option><option value="daily">Daily</option></select></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn-modal-cancel" id="btnCancelBudget2">Cancel</button>
@@ -1501,60 +678,29 @@
         </form>
     </div>
 </div>
-
-<!-- ── Modal: Account ────────────────────────────────────────────────────── -->
+<!-- Modal: Account -->
 <div class="modal" id="accountModal">
     <div class="modal-content">
         <div class="modal-handle"></div>
-        <div class="modal-header">
-            <span class="modal-title" id="accountModalTitle">New Account</span>
-            <button class="modal-close" id="btnCancelAccount">✕</button>
-        </div>
+        <div class="modal-header"><span class="modal-title" id="accountModalTitle">New Account</span><button class="modal-close" id="btnCancelAccount">✕</button></div>
         <form id="accountForm">
             <div class="modal-body">
                 <input type="hidden" id="editAccountId">
-                <div class="form-group">
-                    <label for="accountName">Account name</label>
-                    <input type="text" id="accountName" required placeholder="e.g. BBVA Mexico, Cash…">
-                </div>
+                <div class="form-group"><label for="accountName">Account name</label><input type="text" id="accountName" required placeholder="e.g. BBVA Mexico, Cash…"></div>
                 <div class="form-group">
                     <label>Type</label>
                     <div class="account-type-grid">
-                        <div class="account-type-tile selected" data-type="cash">
-                            <span class="account-type-tile-icon">💵</span>Cash
-                        </div>
-                        <div class="account-type-tile" data-type="bank-mx">
-                            <span class="account-type-tile-icon">🏦</span>Bank MX
-                        </div>
-                        <div class="account-type-tile" data-type="bank-us">
-                            <span class="account-type-tile-icon">🇺🇸</span>Bank USD
-                        </div>
-                        <div class="account-type-tile" data-type="credit">
-                            <span class="account-type-tile-icon">💳</span>Credit
-                        </div>
-                        <div class="account-type-tile" data-type="savings">
-                            <span class="account-type-tile-icon">🐷</span>Savings
-                        </div>
-                        <div class="account-type-tile" data-type="other">
-                            <span class="account-type-tile-icon">📂</span>Other
-                        </div>
+                        <div class="account-type-tile selected" data-type="cash"><span class="account-type-tile-icon">💵</span>Cash</div>
+                        <div class="account-type-tile" data-type="bank-mx"><span class="account-type-tile-icon">🏦</span>Bank MX</div>
+                        <div class="account-type-tile" data-type="bank-us"><span class="account-type-tile-icon">🇺🇸</span>Bank USD</div>
+                        <div class="account-type-tile" data-type="credit"><span class="account-type-tile-icon">💳</span>Credit</div>
+                        <div class="account-type-tile" data-type="savings"><span class="account-type-tile-icon">🐷</span>Savings</div>
+                        <div class="account-type-tile" data-type="other"><span class="account-type-tile-icon">📂</span>Other</div>
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group">
-                        <label for="accountCurrency">Currency</label>
-                        <select id="accountCurrency">
-                            <option value="MXN">MXN — Peso</option>
-                            <option value="USD">USD — Dollar</option>
-                            <option value="EUR">EUR — Euro</option>
-                            <option value="CAD">CAD — Dollar CA</option>
-                            <option value="OTHER">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="accountInitialBalance">Initial balance</label>
-                        <input type="number" id="accountInitialBalance" step="0.01" placeholder="0.00" value="0">
-                    </div>
+                    <div class="form-group"><label for="accountCurrency">Currency</label><select id="accountCurrency"><option value="MXN">MXN — Peso</option><option value="USD">USD — Dollar</option><option value="EUR">EUR — Euro</option><option value="CAD">CAD — Dollar CA</option><option value="OTHER">Other</option></select></div>
+                    <div class="form-group"><label for="accountInitialBalance">Initial balance</label><input type="number" id="accountInitialBalance" inputmode="decimal" step="0.01" placeholder="0.00" value="0"></div>
                 </div>
                 <div class="form-group" style="margin-bottom:0;">
                     <label>Color</label>
@@ -1577,24 +723,41 @@
         </form>
     </div>
 </div>
-
+<!-- Modal: Category Transactions -->
+<div class="modal" id="categoryTxModal">
+    <div class="modal-content">
+        <div class="modal-handle"></div>
+        <div class="modal-header"><span class="modal-title" id="catTxModalTitle">Category</span><button class="modal-close" id="btnCloseCatTx">✕</button></div>
+        <div class="modal-body">
+            <div id="catTxList" style="max-height:50vh;overflow-y:auto;"></div>
+            <div style="margin-top:12px;">
+                <button class="btn-secondary" id="btnViewAllCatTx">View All in History</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
-// ── State ─────────────────────────────────────────────────────────────────
+// ── State ──────────────────────────────────────────────────────────────────
 let transactions = [];
 let categories   = [];
 let budgets      = [];
 let accounts     = [];
-let categoryChart = null;
-let trendChart    = null;
-let currentFilter = 'all';
+let weeklyRingChart = null;
+let barChartInst    = null;
+let currentFilter   = 'all';
 let filterStartDate = null;
 let filterEndDate   = null;
 let currentBudgetCategoryId = null;
 let selectedAccountType  = 'cash';
 let selectedAccountColor = '#0f172a';
 let headerFilter = 'all';
+let barChartView = 'category'; // 'category' | 'monthly'
+let weeklySalary = 0;
+let exchangeRate = 17.5; // 1 USD = MXN reference rate
+let currentCatTxCategoryId = null;
+let historyFilterCategoryId = null;
 
-// ── Defaults ──────────────────────────────────────────────────────────────
+// ── Defaults ────────────────────────────────────────────────────────────────
 function getDefaultCategories() {
     return [
         { id: 1, name: 'Salary', type: 'income' },
@@ -1613,12 +776,14 @@ function getDefaultCategories() {
     ];
 }
 
-// ── Persistence ────────────────────────────────────────────────────────────
+// ── Persistence ──────────────────────────────────────────────────────────────
 function loadData() {
     transactions = JSON.parse(localStorage.getItem('transactions')) || [];
     categories   = JSON.parse(localStorage.getItem('categories'))   || getDefaultCategories();
     budgets      = JSON.parse(localStorage.getItem('budgets'))      || [];
     accounts     = JSON.parse(localStorage.getItem('accounts'))     || [];
+    weeklySalary = parseFloat(localStorage.getItem('weeklySalary')) || 0;
+    exchangeRate = parseFloat(localStorage.getItem('exchangeRate')) || 17.5;
 }
 
 function saveData() {
@@ -1628,16 +793,28 @@ function saveData() {
     localStorage.setItem('accounts',     JSON.stringify(accounts));
 }
 
-// ── Toast ─────────────────────────────────────────────────────────────────
-function showToast(msg) {
+// ── Toast ────────────────────────────────────────────────────────────────────
+function showToast(msg, type) {
     const t = document.getElementById('toast');
-    t.textContent = msg;
+    t.className = 'toast';
+    t.innerHTML = '';
+    if (type === 'income') {
+        t.classList.add('toast-income');
+        t.innerHTML = '✅ ' + msg;
+    } else if (type === 'expense') {
+        t.classList.add('toast-expense');
+        t.innerHTML = '✅ ' + msg;
+    } else {
+        t.classList.add('toast-default');
+        t.textContent = msg;
+    }
     t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 2200);
+    setTimeout(() => t.classList.remove('show'), 2400);
 }
 
-// ── Account helpers ────────────────────────────────────────────────────────
-const ACCOUNT_ICONS = { cash:'💵', 'bank-mx':'🏦', 'bank-us':'🇺🇸', credit:'💳', savings:'🐷', other:'📂' };
+
+// ── Account helpers ──────────────────────────────────────────────────────────
+const ACCOUNT_ICONS  = { cash:'💵', 'bank-mx':'🏦', 'bank-us':'🇺🇸', credit:'💳', savings:'🐷', other:'📂' };
 const ACCOUNT_LABELS = { cash:'Cash', 'bank-mx':'Bank MX', 'bank-us':'Bank USD', credit:'Credit', savings:'Savings', other:'Other' };
 
 function getAccountBalance(accountId) {
@@ -1646,8 +823,8 @@ function getAccountBalance(accountId) {
     let delta = 0;
     transactions.forEach(t => {
         if (t.accountId !== accountId) return;
-        if (t.type === 'income')       delta += t.amount;
-        else if (t.type === 'expense') delta -= t.amount;
+        if (t.type === 'income')            delta += t.amount;
+        else if (t.type === 'expense')      delta -= t.amount;
         else if (t.type === 'transfer-out') delta -= t.amount;
         else if (t.type === 'transfer-in')  delta += t.amount;
     });
@@ -1660,27 +837,79 @@ function getTotalBalance() {
         const exp = transactions.filter(t => t.type === 'expense').reduce((s,t) => s+t.amount, 0);
         return inc - exp;
     }
-    return accounts.reduce((s, a) => s + getAccountBalance(a.id), 0);
+    // Convert everything to USD using reference rate
+    return accounts.reduce((s, a) => {
+        const bal = getAccountBalance(a.id);
+        const toUSD = (a.currency === 'MXN')  ? bal / exchangeRate
+                    : (a.currency === 'EUR')   ? bal * 1.08
+                    : (a.currency === 'CAD')   ? bal * 0.74
+                    : bal; // USD or OTHER stays as-is
+        return s + toUSD;
+    }, 0);
 }
 
-// ── Render accounts ────────────────────────────────────────────────────────
+// Returns balance grouped by currency { MXN: x, USD: y, ... }
+function getBalanceByCurrency() {
+    const byCur = {};
+    accounts.forEach(a => {
+        const bal = getAccountBalance(a.id);
+        const cur = a.currency || 'MXN';
+        byCur[cur] = (byCur[cur] || 0) + bal;
+    });
+    return byCur;
+}
+
+const CURRENCY_SYMBOLS = { MXN: '$', USD: '$', EUR: '€', CAD: '$', OTHER: '$' };
+const CURRENCY_FLAGS   = { MXN: '🇲🇽', USD: '🇺🇸', EUR: '🇪🇺', CAD: '🇨🇦', OTHER: '💱' };
+
+// ── Render accounts ──────────────────────────────────────────────────────────
 function renderAccounts() {
-    const grid    = document.getElementById('accountsGrid');
-    const total   = getTotalBalance();
-    document.getElementById('totalBalanceDisplay').textContent = '$' + total.toFixed(2);
-    document.getElementById('totalAccountsSubtitle').textContent =
-        accounts.length + ' account' + (accounts.length !== 1 ? 's' : '');
+    const grid = document.getElementById('accountsGrid');
+    const totalUSD = getTotalBalance();
+    document.getElementById('totalBalanceDisplay').textContent = '$' + totalUSD.toFixed(2) + ' USD';
+    document.getElementById('totalAccountsSubtitle').textContent = accounts.length + ' account' + (accounts.length !== 1 ? 's' : '');
+
+    // Currency breakdown
+    const breakdown = document.getElementById('currencyBreakdown');
+    if (accounts.length > 0) {
+        const byCur = getBalanceByCurrency();
+        const currencies = Object.keys(byCur).filter(c => c !== 'MXN');
+        if (currencies.length > 0) {
+            breakdown.style.display = 'flex';
+            breakdown.style.flexWrap = 'wrap';
+            breakdown.style.gap = '10px';
+            // Show MXN native
+            let html = '';
+            Object.entries(byCur).forEach(([cur, bal]) => {
+                const sym = CURRENCY_SYMBOLS[cur] || '$';
+                const flag = CURRENCY_FLAGS[cur] || '💱';
+                const neg = bal < 0;
+                html += `<div style="background:rgba(255,255,255,0.15);border-radius:8px;padding:6px 12px;font-size:0.8rem;font-weight:700;">
+                    ${flag} ${cur}: <span style="${neg?'color:#fca5a5':'color:#fff'}">${neg?'-':''}${sym}${Math.abs(bal).toFixed(2)}</span>
+                </div>`;
+            });
+            if (currencies.length > 0) {
+                // Show approx MXN equivalent note
+                html += `<div style="width:100%;font-size:0.7rem;opacity:0.6;margin-top:2px;">≈ Total en USD (ref. $1 USD = $${exchangeRate} MXN)</div>`;
+            }
+            breakdown.innerHTML = html;
+        } else {
+            breakdown.style.display = 'none';
+        }
+    } else {
+        breakdown.style.display = 'none';
+    }
 
     if (accounts.length === 0) {
         grid.innerHTML = `<div style="grid-column:1/-1" class="empty-state"><div class="empty-state-icon">🏦</div><p>No accounts yet</p></div>`;
         updateTransferSelects(); return;
     }
-
     grid.innerHTML = accounts.map(a => {
         const bal = getAccountBalance(a.id);
         const neg = bal < 0;
-        return `
-        <div class="account-card" style="--account-color:${a.color};">
+        const sym = CURRENCY_SYMBOLS[a.currency] || '$';
+        const flag = CURRENCY_FLAGS[a.currency] || '';
+        return `<div class="account-card" style="--account-color:${a.color};">
             <div class="account-card-header">
                 <span class="account-icon">${ACCOUNT_ICONS[a.type] || '📂'}</span>
                 <div class="account-card-actions">
@@ -1689,8 +918,8 @@ function renderAccounts() {
                 </div>
             </div>
             <div class="account-name">${a.name}</div>
-            <div class="account-meta">${a.currency} · ${ACCOUNT_LABELS[a.type] || 'Account'}</div>
-            <div class="account-balance ${neg ? 'negative' : ''}">${neg ? '-' : ''}$${Math.abs(bal).toFixed(2)}</div>
+            <div class="account-meta">${flag} ${a.currency} · ${ACCOUNT_LABELS[a.type] || 'Account'}</div>
+            <div class="account-balance ${neg ? 'negative' : ''}">${neg ? '-' : ''}${sym}${Math.abs(bal).toFixed(2)}</div>
         </div>`;
     }).join('');
     updateTransferSelects();
@@ -1725,7 +954,7 @@ function updateAccountOptions() {
     if (cur) sel.value = cur;
 }
 
-// ── Add / edit account ─────────────────────────────────────────────────────
+// ── Add / edit account ───────────────────────────────────────────────────────
 function openAddAccount() {
     document.getElementById('accountModalTitle').textContent = 'New Account';
     document.getElementById('accountForm').reset();
@@ -1756,47 +985,53 @@ function openEditAccount(id) {
 
 function deleteAccount(id) {
     const hasTx = transactions.some(t => t.accountId === id);
-    const msg = hasTx
-        ? 'This account has transactions. Delete anyway? Transactions will be unassigned.'
-        : 'Delete this account?';
+    const msg = hasTx ? 'This account has transactions. Delete anyway? Transactions will be unassigned.' : 'Delete this account?';
     if (!confirm(msg)) return;
     if (hasTx) transactions.forEach(t => { if (t.accountId === id) t.accountId = null; });
     accounts = accounts.filter(a => a.id !== id);
-    saveData();
-    renderAccounts();
-    updateAccountOptions();
-    updateMiniIndicators();
+    saveData(); renderAccounts(); updateAccountOptions(); updateMiniIndicators();
     showToast('Account deleted');
 }
 
-// ── Transfer ───────────────────────────────────────────────────────────────
+// ── Transfer ─────────────────────────────────────────────────────────────────
 function doTransfer() {
     const amount = parseFloat(document.getElementById('transferAmount').value);
     const fromId = parseInt(document.getElementById('transferFrom').value);
     const toId   = parseInt(document.getElementById('transferTo').value);
     const desc   = document.getElementById('transferDescription').value;
-
     if (!amount || amount <= 0) { showToast('Enter a valid amount'); return; }
     if (!fromId || !toId)       { showToast('Select both accounts'); return; }
     if (fromId === toId)        { showToast('Origin and destination must differ'); return; }
-
     const fromA = accounts.find(a => a.id === fromId);
     const toA   = accounts.find(a => a.id === toId);
-    const date  = new Date().toISOString().split('T')[0];
-    const tid   = Date.now();
 
-    transactions.push({ id: tid,   type: 'transfer-out', accountId: fromId, linkedTransferId: tid+1, amount, date, description: desc || `Transfer → ${toA.name}` });
-    transactions.push({ id: tid+1, type: 'transfer-in',  accountId: toId,   linkedTransferId: tid,   amount, date, description: desc || `Transfer ← ${fromA.name}` });
+    // Warn if different currencies
+    if (fromA.currency !== toA.currency) {
+        const fromSym = CURRENCY_SYMBOLS[fromA.currency] || '$';
+        const toSym   = CURRENCY_SYMBOLS[toA.currency] || '$';
+        const proceed = confirm(
+            `⚠️ Different currencies!\n\n` +
+            `From: ${fromA.currency} (${fromA.name})\n` +
+            `To: ${toA.currency} (${toA.name})\n\n` +
+            `The transfer will record ${fromSym}${amount.toFixed(2)} ${fromA.currency} going out and ${toSym}${amount.toFixed(2)} ${toA.currency} coming in.\n\n` +
+            `Make sure to enter the converted amount manually. Continue?`
+        );
+        if (!proceed) return;
+    }
 
-    saveData();
-    renderAccounts();
-    updateMiniIndicators();
+    const date = new Date().toISOString().split('T')[0];
+    const tid  = Date.now();
+    const xrNote = fromA.currency !== toA.currency ? ` [${fromA.currency}→${toA.currency}]` : '';
+    transactions.push({ id: tid,   type: 'transfer-out', accountId: fromId, linkedTransferId: tid+1, amount, date, description: desc || `Transfer → ${toA.name}${xrNote}` });
+    transactions.push({ id: tid+1, type: 'transfer-in',  accountId: toId,   linkedTransferId: tid,   amount, date, description: desc || `Transfer ← ${fromA.name}${xrNote}` });
+    saveData(); renderAccounts(); updateMiniIndicators();
     document.getElementById('transferAmount').value = '';
     document.getElementById('transferDescription').value = '';
-    showToast(`Transferred $${amount.toFixed(2)} → ${toA.name}`);
+    const sym = CURRENCY_SYMBOLS[fromA.currency] || '$';
+    showToast(`Transferred ${sym}${amount.toFixed(2)} ${fromA.currency} → ${toA.name}`);
 }
 
-// ── Categories ─────────────────────────────────────────────────────────────
+// ── Categories ───────────────────────────────────────────────────────────────
 function updateCategoryOptions() {
     const sel = document.getElementById('category');
     sel.innerHTML = '<option value="">Select…</option>';
@@ -1814,11 +1049,14 @@ function updateCategoryOptions() {
     }
 }
 
-// ── Add transaction ────────────────────────────────────────────────────────
+// ── Add transaction ──────────────────────────────────────────────────────────
 function addTransaction(type) {
-    const form = document.getElementById('quickForm');
-    if (!form.checkValidity()) { form.reportValidity(); return; }
+    const amtVal = parseFloat(document.getElementById('amount').value);
+    if (!amtVal || amtVal <= 0) { showToast('Enter a valid amount'); document.getElementById('amount').focus(); return; }
     const categoryId = parseInt(document.getElementById('category').value);
+    if (!categoryId) { showToast('Please select a category'); return; }
+    const dateVal = document.getElementById('date').value;
+    if (!dateVal) { showToast('Please select a date'); return; }
     const cat = categories.find(c => c.id === categoryId);
     if (cat && cat.type !== type) {
         showToast(`Please select a ${type === 'income' ? 'Income' : 'Expense'} category`);
@@ -1828,19 +1066,19 @@ function addTransaction(type) {
     const accountId    = accountIdRaw ? parseInt(accountIdRaw) : null;
     transactions.push({
         id: Date.now(), type, categoryId, accountId,
-        amount: parseFloat(document.getElementById('amount').value),
-        date: document.getElementById('date').value,
+        amount: amtVal,
+        date: dateVal,
         description: document.getElementById('description').value
     });
-    saveData();
-    updateUI();
-    form.reset();
+    saveData(); updateUI();
+    // Reset form
+    document.getElementById('quickForm').reset();
     document.getElementById('date').valueAsDate = new Date();
-    document.getElementById('amount').focus();
-    showToast(type === 'income' ? '↑ Income added' : '↓ Expense added');
+    document.getElementById('amountCurrencyPrefix').textContent = '$';
+    showToast(type === 'income' ? 'Income added' : 'Expense added', type);
 }
 
-// ── Stats ──────────────────────────────────────────────────────────────────
+// ── Stats ─────────────────────────────────────────────────────────────────────
 function getHeaderFilteredTransactions() {
     const now = new Date();
     if (headerFilter === 'month') {
@@ -1876,18 +1114,18 @@ function updateUI() {
     if (accounts.length > 0) renderAccounts();
 }
 
-// ── Navigation ─────────────────────────────────────────────────────────────
+// ── Navigation ───────────────────────────────────────────────────────────────
 function showSection(id) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    if (id === 'analysisSection') updateAnalysis();
-    else if (id === 'historySection') updateHistory();
+    if (id === 'analysisSection')  updateAnalysis();
+    else if (id === 'historySection')  updateHistory();
     else if (id === 'settingsSection') updateCategoryList();
     else if (id === 'accountsSection') renderAccounts();
 }
 
-// ── Analysis filters ───────────────────────────────────────────────────────
+// ── Analysis filters ──────────────────────────────────────────────────────────
 function getFilteredTransactions() {
     let f = [...transactions];
     if (currentFilter === 'current-month') {
@@ -1900,6 +1138,23 @@ function getFilteredTransactions() {
     return f;
 }
 
+// Get current week Mon-Sun date strings
+function getCurrentWeekRange() {
+    const now = new Date();
+    const day = now.getDay(); // 0=Sun
+    const diffToMon = day === 0 ? -6 : 1 - day;
+    const mon = new Date(now);
+    mon.setDate(now.getDate() + diffToMon);
+    mon.setHours(0,0,0,0);
+    const sun = new Date(mon);
+    sun.setDate(mon.getDate() + 6);
+    return {
+        start: mon.toISOString().split('T')[0],
+        end:   sun.toISOString().split('T')[0],
+        mon, sun
+    };
+}
+
 function updateAnalysis() {
     const f   = getFilteredTransactions();
     const inc = f.filter(t => t.type === 'income').reduce((s,t) => s+t.amount, 0);
@@ -1908,82 +1163,227 @@ function updateAnalysis() {
     document.getElementById('statIncome').textContent  = '$' + inc.toFixed(2);
     document.getElementById('statExpense').textContent = '$' + exp.toFixed(2);
     document.getElementById('statCount').textContent   = f.length;
+    updateWeeklyRingChart();
     updateBudgetList();
-    updateCategoryChart();
-    updateTrendChart();
+    updateBarChart();
 }
 
-// ── Charts ─────────────────────────────────────────────────────────────────
+// ── Weekly ring chart ────────────────────────────────────────────────────────
+function updateWeeklyRingChart() {
+    const ctx = document.getElementById('weeklyRingChart').getContext('2d');
+    const { start, end, mon, sun } = getCurrentWeekRange();
+
+    // Format label
+    const fmt = d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    document.getElementById('weekRangeLabel').textContent = fmt(mon) + ' – ' + fmt(sun);
+
+    // Weekly expenses this week
+    const weekExp = transactions
+        .filter(t => t.type === 'expense' && t.date >= start && t.date <= end)
+        .reduce((s,t) => s+t.amount, 0);
+
+    // Get effective weekly salary (also add weekly portion of monthly budgets)
+    let effectiveSalary = weeklySalary;
+    // If no salary set, try sum of weekly-equivalent budgets
+    if (effectiveSalary <= 0) {
+        budgets.forEach(b => {
+            if (b.period === 'weekly')       effectiveSalary += b.amount;
+            else if (b.period === 'monthly') effectiveSalary += b.amount / 4.33;
+            else if (b.period === 'daily')   effectiveSalary += b.amount * 7;
+        });
+    }
+
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+
+    if (weeklyRingChart) weeklyRingChart.destroy();
+
+    const amountEl = document.getElementById('weeklyRingAmount');
+    const pctEl    = document.getElementById('weeklyRingPct');
+    const legendEl = document.getElementById('weeklyRingLegend');
+
+    if (effectiveSalary <= 0) {
+        amountEl.textContent  = '—';
+        pctEl.textContent     = 'Set salary in Settings';
+        legendEl.innerHTML    = '';
+        // Still draw empty donut
+        weeklyRingChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['No salary set'],
+                datasets: [{ data: [1], backgroundColor: [isDark ? '#334155' : '#e2e8f0'], borderWidth: 0 }]
+            },
+            options: { responsive: true, cutout: '70%', plugins: { legend: { display: false }, tooltip: { enabled: false } }, animation: { animateRotate: true } }
+        });
+        return;
+    }
+
+    const remaining = effectiveSalary - weekExp;
+    const pct       = Math.min((weekExp / effectiveSalary) * 100, 100);
+    const expCapped = Math.min(weekExp, effectiveSalary);
+    const remCapped = Math.max(effectiveSalary - weekExp, 0);
+    const status    = pct >= 100 ? '#dc2626' : pct >= 80 ? '#d97706' : '#059669';
+
+    amountEl.textContent  = (remaining >= 0 ? '$' + remaining.toFixed(2) : '-$' + Math.abs(remaining).toFixed(2));
+    amountEl.style.color  = remaining >= 0 ? 'var(--success)' : 'var(--danger)';
+    pctEl.textContent     = pct.toFixed(0) + '% used';
+    legendEl.innerHTML    = `<span style="color:${status};">■ Spent $${weekExp.toFixed(2)}</span><span style="color:var(--text-tertiary);">■ Remaining $${Math.max(remaining,0).toFixed(2)}</span>`;
+
+    weeklyRingChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Spent', 'Remaining'],
+            datasets: [{
+                data: [expCapped, remCapped],
+                backgroundColor: [status, isDark ? '#334155' : '#f1f5f9'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            cutout: '72%',
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => ' $' + ctx.parsed.toFixed(2)
+                    }
+                }
+            },
+            animation: { animateRotate: true }
+        }
+    });
+}
+
+// ── Bar chart (by category + monthly trend) ──────────────────────────────────
 function getChartColors() {
     return ['#0f172a','#475569','#6366f1','#059669','#dc2626','#ea580c','#db2777','#ca8a04','#7c3aed','#0284c7','#10b981','#f87171'];
 }
 
-function updateCategoryChart() {
-    const ctx = document.getElementById('categoryChart').getContext('2d');
+function updateBarChart() {
+    const ctx = document.getElementById('barChart').getContext('2d');
     const f   = getFilteredTransactions();
-    const data = {};
-    f.forEach(t => {
-        const cat = categories.find(c => c.id === t.categoryId);
-        if (cat) data[cat.name] = (data[cat.name] || 0) + t.amount;
-    });
-    if (categoryChart) categoryChart.destroy();
-    if (!Object.keys(data).length) return;
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    categoryChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: Object.keys(data),
-            datasets: [{ data: Object.values(data), backgroundColor: getChartColors(), borderWidth: 2, borderColor: isDark ? '#1e293b' : '#fff' }]
-        },
-        options: { responsive: true, cutout: '62%', plugins: { legend: { position: 'bottom', labels: { color: isDark ? '#94a3b8' : '#64748b', font: { size: 12 }, padding: 14 } } } }
-    });
+    if (barChartInst) barChartInst.destroy();
+
+    // Weekly salary as reference (weekly)
+    let salaryRef = weeklySalary;
+
+    if (barChartView === 'category') {
+        document.getElementById('barChartTitle').textContent = 'By Category';
+        // Sum expenses per category
+        const catData = {};
+        f.filter(t => t.type === 'expense').forEach(t => {
+            const cat = categories.find(c => c.id === t.categoryId);
+            const name = cat ? cat.name : 'Uncategorized';
+            catData[name] = (catData[name] || 0) + t.amount;
+        });
+        const labels  = Object.keys(catData);
+        const values  = Object.values(catData);
+        if (!labels.length) return;
+
+        const datasets = [
+            {
+                type: 'bar',
+                label: 'Expenses',
+                data: values,
+                backgroundColor: getChartColors().slice(0, labels.length),
+                borderRadius: 4
+            }
+        ];
+
+        if (salaryRef > 0) {
+            datasets.push({
+                type: 'line',
+                label: 'Weekly Salary Cap',
+                data: labels.map(() => salaryRef),
+                borderColor: '#dc2626',
+                borderWidth: 2,
+                borderDash: [6, 4],
+                pointRadius: 0,
+                fill: false,
+                tension: 0
+            });
+        }
+
+        barChartInst = new Chart(ctx, {
+            data: { labels, datasets },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom', labels: { color: isDark ? '#94a3b8' : '#64748b', font: { size: 12 }, padding: 14 } }
+                },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: isDark ? '#2d3f55' : '#f1f5f9' }, ticks: { color: isDark ? '#64748b' : '#94a3b8' } },
+                    x: { grid: { display: false }, ticks: { color: isDark ? '#64748b' : '#94a3b8' } }
+                }
+            }
+        });
+    } else {
+        // Monthly trend view
+        document.getElementById('barChartTitle').textContent = 'Monthly Trend';
+        const mon = {};
+        f.forEach(t => {
+            const m = t.date.substring(0,7);
+            if (!mon[m]) mon[m] = { income: 0, expense: 0 };
+            if (t.type === 'income')  mon[m].income  += t.amount;
+            if (t.type === 'expense') mon[m].expense += t.amount;
+        });
+        if (!Object.keys(mon).length) return;
+        const labels = Object.keys(mon).sort();
+        const datasets = [
+            { type: 'bar', label: 'Income',   data: labels.map(m => mon[m].income),  backgroundColor: 'rgba(5,150,105,0.75)',  borderRadius: 4 },
+            { type: 'bar', label: 'Expenses', data: labels.map(m => mon[m].expense), backgroundColor: 'rgba(220,38,38,0.65)', borderRadius: 4 }
+        ];
+        if (salaryRef > 0) {
+            // Show monthly equivalent (weekly * 4.33)
+            const monthlySalary = salaryRef * 4.33;
+            datasets.push({
+                type: 'line',
+                label: 'Monthly Salary Est.',
+                data: labels.map(() => monthlySalary),
+                borderColor: '#dc2626',
+                borderWidth: 2,
+                borderDash: [6, 4],
+                pointRadius: 0,
+                fill: false,
+                tension: 0
+            });
+        }
+        barChartInst = new Chart(ctx, {
+            data: {
+                labels: labels.map(l => { const [y,m] = l.split('-'); return new Date(y,m-1).toLocaleDateString('en-US',{month:'short',year:'2-digit'}); }),
+                datasets
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { position: 'bottom', labels: { color: isDark ? '#94a3b8' : '#64748b', font: { size: 12 }, padding: 14 } } },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: isDark ? '#2d3f55' : '#f1f5f9' }, ticks: { color: isDark ? '#64748b' : '#94a3b8' } },
+                    x: { grid: { display: false }, ticks: { color: isDark ? '#64748b' : '#94a3b8' } }
+                }
+            }
+        });
+    }
 }
 
-function updateTrendChart() {
-    const ctx  = document.getElementById('trendChart').getContext('2d');
-    const f    = getFilteredTransactions();
-    const mon  = {};
-    f.forEach(t => {
-        const m = t.date.substring(0,7);
-        if (!mon[m]) mon[m] = { income: 0, expense: 0 };
-        if (t.type === 'income')  mon[m].income  += t.amount;
-        if (t.type === 'expense') mon[m].expense += t.amount;
-    });
-    if (trendChart) trendChart.destroy();
-    if (!Object.keys(mon).length) return;
-    const labels = Object.keys(mon).sort();
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    trendChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels.map(l => { const [y,m] = l.split('-'); return new Date(y,m-1).toLocaleDateString('en-US',{month:'short',year:'2-digit'}); }),
-            datasets: [
-                { label: 'Income',   data: labels.map(m => mon[m].income),  backgroundColor: 'rgba(5,150,105,0.75)',  borderRadius: 4 },
-                { label: 'Expenses', data: labels.map(m => mon[m].expense), backgroundColor: 'rgba(220,38,38,0.65)', borderRadius: 4 }
-            ]
-        },
-        options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { color: isDark ? '#94a3b8' : '#64748b', font: { size: 12 }, padding: 14 } } }, scales: { y: { beginAtZero: true, grid: { color: isDark ? '#2d3f55' : '#f1f5f9' }, ticks: { color: isDark ? '#64748b' : '#94a3b8' } }, x: { grid: { display: false }, ticks: { color: isDark ? '#64748b' : '#94a3b8' } } } }
-    });
-}
-
-// ── History ────────────────────────────────────────────────────────────────
+// ── History ───────────────────────────────────────────────────────────────────
 let historyQuery = '';
 
 function updateHistory() {
     const container = document.getElementById('transactionList');
     const q = historyQuery.toLowerCase();
-
     let sorted = [...transactions].sort((a,b) => new Date(b.date) - new Date(a.date));
+    if (historyFilterCategoryId) {
+        sorted = sorted.filter(t => t.categoryId === historyFilterCategoryId);
+    }
     if (q) sorted = sorted.filter(t => {
         const cat = categories.find(c => c.id === t.categoryId);
         return (cat && cat.name.toLowerCase().includes(q)) || (t.description && t.description.toLowerCase().includes(q));
     });
-
     if (!sorted.length) {
         container.innerHTML = `<div class="empty-state"><div class="empty-state-icon">📭</div><p>${q ? 'No results found' : 'No transactions yet'}</p></div>`;
         return;
     }
-
     // Group by date
     const groups = {};
     sorted.forEach(t => {
@@ -1997,8 +1397,14 @@ function updateHistory() {
         if (!groups[label]) groups[label] = [];
         groups[label].push(t);
     });
-
     let html = '';
+    if (historyFilterCategoryId) {
+        const cat = categories.find(c => c.id === historyFilterCategoryId);
+        html += `<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 4px;margin-bottom:4px;">
+            <span style="font-size:0.8rem;color:var(--text-secondary);">Filtered: <strong>${cat ? cat.name : 'Category'}</strong></span>
+            <button class="btn-ghost" onclick="clearHistoryFilter()" style="font-size:0.75rem;padding:4px 10px;">Clear filter</button>
+        </div>`;
+    }
     Object.entries(groups).forEach(([label, txs]) => {
         html += `<div class="transaction-group-header">${label}</div>`;
         html += '<div class="transaction-list">';
@@ -2009,21 +1415,13 @@ function updateHistory() {
             if (t.type === 'transfer-out') { catName = 'Transfer (out)'; amtClass = 'transfer-out'; sign = '-'; icon = '⇄'; }
             else if (t.type === 'transfer-in') { catName = 'Transfer (in)'; amtClass = 'transfer-in'; sign = '+'; icon = '⇄'; }
             else { catName = cat ? cat.name : 'Uncategorized'; amtClass = t.type; sign = t.type === 'income' ? '+' : '-'; icon = t.type === 'income' ? '↑' : '↓'; }
-
             const dotClass = t.type.startsWith('transfer') ? 'transfer' : t.type;
-            const acctPill = account
-                ? `<span class="transaction-account-pill" style="--account-color:${account.color||'#94a3b8'}">${ACCOUNT_ICONS[account.type]||'💼'} ${account.name}</span>`
-                : '';
-
-            html += `
-            <div class="transaction-item">
+            const acctPill = account ? `<span class="transaction-account-pill" style="--account-color:${account.color||'#94a3b8'}">${ACCOUNT_ICONS[account.type]||'💼'} ${account.name}</span>` : '';
+            html += `<div class="transaction-item">
                 <div class="transaction-type-dot ${dotClass}">${icon}</div>
                 <div class="transaction-info">
                     <div class="transaction-category">${catName}</div>
-                    <div class="transaction-meta">
-                        ${t.description ? `<span>${t.description}</span><span>·</span>` : ''}
-                        ${acctPill}
-                    </div>
+                    <div class="transaction-meta">${t.description ? `<span>${t.description}</span><span>·</span>` : ''}${acctPill}</div>
                 </div>
                 <div class="transaction-right">
                     <span class="transaction-amount ${amtClass}">${sign}$${t.amount.toFixed(2)}</span>
@@ -2034,6 +1432,11 @@ function updateHistory() {
         html += '</div>';
     });
     container.innerHTML = html;
+}
+
+function clearHistoryFilter() {
+    historyFilterCategoryId = null;
+    updateHistory();
 }
 
 function deleteTransaction(id) {
@@ -2049,18 +1452,107 @@ function deleteTransaction(id) {
     showToast('Transaction deleted');
 }
 
-// ── Category list ─────────────────────────────────────────────────────────
+// ── Category list (with drag reorder) ────────────────────────────────────────
+let dragSrcIdx = null;
+
 function updateCategoryList() {
     const container = document.getElementById('categoryList');
-    if (!categories.length) { container.innerHTML = '<p style="color:var(--text-tertiary);font-size:0.875rem;text-align:center;padding:20px;">No categories</p>'; return; }
-    container.innerHTML = categories.map(c => `
-        <div class="category-item">
+    if (!categories.length) {
+        container.innerHTML = '<p style="color:var(--text-tertiary);font-size:0.875rem;text-align:center;padding:20px;">No categories</p>';
+        return;
+    }
+    container.innerHTML = categories.map((c, idx) => `
+        <div class="category-item" draggable="true" data-idx="${idx}">
             <div class="category-item-left">
+                <span class="drag-handle" data-idx="${idx}">≡</span>
                 <span class="category-type-badge ${c.type}">${c.type === 'income' ? 'Income' : 'Expense'}</span>
                 <span class="category-name">${c.name}</span>
             </div>
             <button class="btn-icon-sm" onclick="deleteCategory(${c.id})" title="Delete">✕</button>
         </div>`).join('');
+    initCategoryDrag();
+}
+
+function initCategoryDrag() {
+    const items = document.querySelectorAll('#categoryList .category-item');
+    items.forEach(item => {
+        item.addEventListener('dragstart', e => {
+            dragSrcIdx = parseInt(item.dataset.idx);
+            item.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+        });
+        item.addEventListener('dragend', () => {
+            item.classList.remove('dragging');
+            document.querySelectorAll('#categoryList .category-item').forEach(i => i.classList.remove('drag-over'));
+        });
+        item.addEventListener('dragover', e => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            document.querySelectorAll('#categoryList .category-item').forEach(i => i.classList.remove('drag-over'));
+            item.classList.add('drag-over');
+        });
+        item.addEventListener('drop', e => {
+            e.preventDefault();
+            const destIdx = parseInt(item.dataset.idx);
+            if (dragSrcIdx === null || dragSrcIdx === destIdx) return;
+            const moved = categories.splice(dragSrcIdx, 1)[0];
+            categories.splice(destIdx, 0, moved);
+            saveData();
+            updateCategoryList();
+            updateCategoryOptions();
+        });
+    });
+
+    // Touch-based drag
+    let touchSrcIdx = null;
+    let touchClone   = null;
+    let touchStartY  = 0;
+
+    items.forEach(item => {
+        item.addEventListener('touchstart', e => {
+            // Only drag if touch started on the handle
+            if (!e.target.classList.contains('drag-handle')) return;
+            touchSrcIdx = parseInt(item.dataset.idx);
+            touchStartY = e.touches[0].clientY;
+            touchClone  = item.cloneNode(true);
+            touchClone.style.cssText = `position:fixed;left:${item.getBoundingClientRect().left}px;top:${item.getBoundingClientRect().top}px;width:${item.offsetWidth}px;opacity:0.85;z-index:9999;pointer-events:none;border:2px solid var(--accent);border-radius:8px;background:var(--bg-primary);`;
+            document.body.appendChild(touchClone);
+            item.classList.add('dragging');
+        }, { passive: true });
+
+        item.addEventListener('touchmove', e => {
+            if (touchSrcIdx === null) return;
+            e.preventDefault();
+            const y = e.touches[0].clientY;
+            if (touchClone) touchClone.style.top = (parseInt(touchClone.style.top) + y - touchStartY) + 'px';
+            touchStartY = y;
+            // Find target item under touch
+            const els = document.elementsFromPoint(e.touches[0].clientX, y);
+            document.querySelectorAll('#categoryList .category-item').forEach(i => i.classList.remove('drag-over'));
+            const tgt = els.find(el => el.classList && el.classList.contains('category-item') && el !== item);
+            if (tgt) tgt.classList.add('drag-over');
+        }, { passive: false });
+
+        item.addEventListener('touchend', e => {
+            if (touchSrcIdx === null) return;
+            const touch = e.changedTouches[0];
+            const els = document.elementsFromPoint(touch.clientX, touch.clientY);
+            const tgt = els.find(el => el.classList && el.classList.contains('category-item'));
+            if (tgt) {
+                const destIdx = parseInt(tgt.dataset.idx);
+                if (destIdx !== undefined && destIdx !== touchSrcIdx) {
+                    const moved = categories.splice(touchSrcIdx, 1)[0];
+                    categories.splice(destIdx, 0, moved);
+                    saveData();
+                    updateCategoryList();
+                    updateCategoryOptions();
+                }
+            }
+            if (touchClone) { document.body.removeChild(touchClone); touchClone = null; }
+            touchSrcIdx = null;
+            document.querySelectorAll('#categoryList .category-item').forEach(i => { i.classList.remove('drag-over'); i.classList.remove('dragging'); });
+        });
+    });
 }
 
 function deleteCategory(id) {
@@ -2071,25 +1563,22 @@ function deleteCategory(id) {
     showToast('Category deleted');
 }
 
-// ── Theme ──────────────────────────────────────────────────────────────────
+// ── Theme ─────────────────────────────────────────────────────────────────────
 function setTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
     document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#0f172a' : '#ffffff';
     document.querySelectorAll('.theme-option').forEach(b => b.classList.toggle('active', b.dataset.theme === theme));
 }
-
 function loadTheme() { setTheme(localStorage.getItem('theme') || 'light'); }
 
-// ── Budgets ────────────────────────────────────────────────────────────────
+// ── Budgets ───────────────────────────────────────────────────────────────────
 function setBudget(categoryId, amount, period) {
     const ex = budgets.find(b => b.categoryId === categoryId);
     if (ex) { ex.amount = amount; ex.period = period; } else budgets.push({ id: Date.now(), categoryId, amount, period });
     saveData();
 }
-
 function removeBudget(categoryId) { budgets = budgets.filter(b => b.categoryId !== categoryId); saveData(); }
-
 function getBudgetForCategory(id) { return budgets.find(b => b.categoryId === id); }
 
 function calcBudgetProgress(categoryId) {
@@ -2102,10 +1591,28 @@ function calcBudgetProgress(categoryId) {
     return { budget: bud.amount, spent, remaining: rem, pct: Math.min(pct, 100), status, period: bud.period };
 }
 
-function updateBudgetList() {
-    const container = document.getElementById('budgetList');
+// Budget order (array of categoryIds)
+let budgetOrder = [];
+
+function getSortedBudgetCats() {
     const expCats = categories.filter(c => c.type === 'expense');
     const withBudget = expCats.filter(c => getBudgetForCategory(c.id));
+    if (!budgetOrder.length) return withBudget;
+    const ordered = budgetOrder.map(id => withBudget.find(c => c.id === id)).filter(Boolean);
+    const rest = withBudget.filter(c => !budgetOrder.includes(c.id));
+    return [...ordered, ...rest];
+}
+
+function saveBudgetOrder() {
+    const container = document.getElementById('budgetList');
+    budgetOrder = [...container.querySelectorAll('.budget-item[data-cat-id]')].map(el => parseInt(el.dataset.catId));
+    localStorage.setItem('budgetOrder', JSON.stringify(budgetOrder));
+}
+
+function updateBudgetList() {
+    const container = document.getElementById('budgetList');
+    budgetOrder = JSON.parse(localStorage.getItem('budgetOrder') || '[]');
+    const withBudget = getSortedBudgetCats();
     if (!withBudget.length) {
         container.innerHTML = '<p style="text-align:center;padding:24px 0;color:var(--text-tertiary);font-size:0.875rem;">No budgets set.<br>Tap "Manage" to get started.</p>';
         return;
@@ -2114,10 +1621,13 @@ function updateBudgetList() {
         const p = calcBudgetProgress(cat.id);
         if (!p) return '';
         const periodLabel = { monthly: 'Monthly', weekly: 'Weekly', daily: 'Daily' }[p.period] || '';
-        return `
-        <div class="budget-item">
+        const safeName = cat.name.replace(/'/g, "\\'");
+        return `<div class="budget-item" data-cat-id="${cat.id}">
             <div class="budget-header">
-                <span class="budget-category">${cat.name}</span>
+                <div style="display:flex;align-items:center;">
+                    <span class="budget-drag-handle" title="Hold to reorder">≡</span>
+                    <span class="budget-category">${cat.name}</span>
+                </div>
                 <span class="budget-amount-label">${periodLabel} · $${p.budget.toFixed(0)}</span>
             </div>
             <div class="budget-bar-track"><div class="budget-bar-fill ${p.status}" style="width:${p.pct}%"></div></div>
@@ -2127,6 +1637,157 @@ function updateBudgetList() {
             </div>
         </div>`;
     }).join('');
+    initBudgetDragAndTap();
+}
+
+function initBudgetDragAndTap() {
+    const container = document.getElementById('budgetList');
+
+    let dragEl     = null;   // the real item being dragged
+    let ghost      = null;   // floating clone
+    let holdTimer  = null;
+    let dragging   = false;
+    let tapBlocked = false;
+    let offsetY    = 0;
+
+    function getItemAt(x, y) {
+        if (ghost) ghost.style.display = 'none';
+        const el = document.elementFromPoint(x, y);
+        if (ghost) ghost.style.display = '';
+        return el && el.closest('.budget-item[data-cat-id]');
+    }
+
+    function startDrag(item, touchY) {
+        dragging   = true;
+        tapBlocked = true;
+        dragEl     = item;
+
+        const rect = item.getBoundingClientRect();
+        offsetY = touchY - rect.top;
+
+        // Create ghost
+        ghost = item.cloneNode(true);
+        ghost.style.cssText = `
+            position:fixed; left:${rect.left}px; top:${rect.top}px;
+            width:${rect.width}px; z-index:9999; pointer-events:none;
+            opacity:0.85; box-shadow:0 8px 24px rgba(0,0,0,0.18);
+            border-color:var(--accent); transform:scale(1.02);
+            transition:transform 0.1s; border-radius:var(--radius-sm);
+            background:var(--bg-primary);
+        `;
+        document.body.appendChild(ghost);
+
+        item.classList.add('dragging');
+        if (navigator.vibrate) navigator.vibrate(30);
+    }
+
+    function endDrag(x, y) {
+        if (!dragEl) return;
+        const over = getItemAt(x, y);
+        container.querySelectorAll('.budget-item').forEach(el => el.classList.remove('drag-over'));
+
+        if (over && over !== dragEl) {
+            const all   = [...container.querySelectorAll('.budget-item[data-cat-id]')];
+            const fromI = all.indexOf(dragEl);
+            const toI   = all.indexOf(over);
+            if (fromI < toI) over.after(dragEl);
+            else             over.before(dragEl);
+            saveBudgetOrder();
+        }
+
+        dragEl.classList.remove('dragging');
+        if (ghost) { ghost.remove(); ghost = null; }
+        dragging = false;
+        dragEl   = null;
+    }
+
+    container.addEventListener('touchstart', e => {
+        const item = e.target.closest('.budget-item[data-cat-id]');
+        if (!item) return;
+
+        tapBlocked = false;
+        const t = e.touches[0];
+
+        holdTimer = setTimeout(() => {
+            startDrag(item, t.clientY);
+        }, 400);
+    }, { passive: true });
+
+    container.addEventListener('touchmove', e => {
+        const t = e.touches[0];
+
+        if (!dragging) {
+            // If finger moved before hold, cancel hold timer
+            clearTimeout(holdTimer);
+            return;
+        }
+
+        e.preventDefault();
+
+        // Move ghost
+        ghost.style.top = (t.clientY - offsetY) + 'px';
+
+        // Highlight target
+        const over = getItemAt(t.clientX, t.clientY);
+        container.querySelectorAll('.budget-item').forEach(el => el.classList.remove('drag-over'));
+        if (over && over !== dragEl) over.classList.add('drag-over');
+
+    }, { passive: false });
+
+    container.addEventListener('touchend', e => {
+        clearTimeout(holdTimer);
+        const t = e.changedTouches[0];
+
+        if (dragging) {
+            endDrag(t.clientX, t.clientY);
+            return;
+        }
+
+        // Tap: open modal only if not blocked
+        if (!tapBlocked) {
+            const item = e.target.closest('.budget-item[data-cat-id]');
+            if (item) {
+                const catId   = parseInt(item.dataset.catId);
+                const catName = item.querySelector('.budget-category').textContent;
+                openCategoryTxModal(catId, catName);
+            }
+        }
+    });
+
+    container.addEventListener('touchcancel', () => {
+        clearTimeout(holdTimer);
+        if (dragEl) dragEl.classList.remove('dragging');
+        if (ghost)  { ghost.remove(); ghost = null; }
+        container.querySelectorAll('.budget-item').forEach(el => el.classList.remove('drag-over'));
+        dragging = false; dragEl = null;
+    });
+}
+
+// ── Category Transactions Modal ───────────────────────────────────────────────
+function openCategoryTxModal(categoryId, categoryName) {
+    currentCatTxCategoryId = categoryId;
+    document.getElementById('catTxModalTitle').textContent = categoryName;
+    // Last 10 transactions for this category
+    const txs = transactions.filter(t => t.categoryId === categoryId && t.type === 'expense')
+        .sort((a,b) => new Date(b.date) - new Date(a.date))
+        .slice(0, 10);
+    const container = document.getElementById('catTxList');
+    if (!txs.length) {
+        container.innerHTML = '<p style="text-align:center;padding:20px;color:var(--text-tertiary);">No transactions found</p>';
+    } else {
+        container.innerHTML = txs.map(t => {
+            const d = new Date(t.date + 'T12:00:00');
+            const dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            return `<div class="cat-tx-item">
+                <div class="cat-tx-left">
+                    <span class="cat-tx-date">${dateStr}</span>
+                    <span class="cat-tx-desc">${t.description || '—'}</span>
+                </div>
+                <span class="cat-tx-amount" style="color:var(--danger);">-$${t.amount.toFixed(2)}</span>
+            </div>`;
+        }).join('');
+    }
+    document.getElementById('categoryTxModal').classList.add('active');
 }
 
 function updateBudgetManageList() {
@@ -2135,11 +1796,10 @@ function updateBudgetManageList() {
     if (!expCats.length) { container.innerHTML = '<p style="text-align:center;padding:20px;color:var(--text-tertiary);">No expense categories</p>'; return; }
     container.innerHTML = expCats.map(cat => {
         const b = getBudgetForCategory(cat.id);
-        return `
-        <div class="category-item" style="margin-bottom:8px;">
+        return `<div class="category-item" style="margin-bottom:8px;">
             <div><span class="category-name">${cat.name}</span>${b ? `<div style="font-size:0.75rem;color:var(--text-secondary);margin-top:2px;">$${b.amount.toFixed(2)} / ${b.period}</div>` : ''}</div>
             <div style="display:flex;gap:6px;">
-                <button class="btn-ghost" onclick="openSetBudget(${cat.id},'${cat.name}')">${b ? 'Edit' : 'Set'}</button>
+                <button class="btn-ghost" onclick="openSetBudget(${cat.id},'${cat.name.replace(/'/g,"\\'")}')">${b ? 'Edit' : 'Set'}</button>
                 ${b ? `<button class="btn-icon-sm" onclick="removeBudgetAndUpdate(${cat.id})">✕</button>` : ''}
             </div>
         </div>`;
@@ -2162,7 +1822,7 @@ function removeBudgetAndUpdate(id) {
     showToast('Budget removed');
 }
 
-// ── Init ──────────────────────────────────────────────────────────────────
+// ── Init ──────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     loadData();
     document.getElementById('date').valueAsDate = new Date();
@@ -2170,6 +1830,42 @@ document.addEventListener('DOMContentLoaded', () => {
     updateAccountOptions();
     updateUI();
     loadTheme();
+
+    // Weekly salary input
+    if (weeklySalary > 0) document.getElementById('weeklySalaryInput').value = weeklySalary;
+    document.getElementById('btnSaveWeeklySalary').addEventListener('click', () => {
+        const v = parseFloat(document.getElementById('weeklySalaryInput').value);
+        if (!isNaN(v) && v >= 0) {
+            weeklySalary = v;
+            localStorage.setItem('weeklySalary', v);
+            showToast('Weekly salary saved');
+            if (document.getElementById('analysisSection').classList.contains('active')) updateAnalysis();
+        } else {
+            showToast('Enter a valid amount');
+        }
+    });
+
+    // Exchange rate setting
+    if (exchangeRate > 0) document.getElementById('exchangeRateInput').value = exchangeRate;
+    document.getElementById('btnSaveExchangeRate').addEventListener('click', () => {
+        const v = parseFloat(document.getElementById('exchangeRateInput').value);
+        if (!isNaN(v) && v > 0) {
+            exchangeRate = v;
+            localStorage.setItem('exchangeRate', v);
+            showToast('Exchange rate saved ✓');
+            renderAccounts();
+        } else {
+            showToast('Enter a valid rate');
+        }
+    });
+
+    // Update amount currency prefix when account changes
+    document.getElementById('accountSelect').addEventListener('change', function() {
+        const prefix = document.getElementById('amountCurrencyPrefix');
+        const accId = parseInt(this.value);
+        const acc = accounts.find(a => a.id === accId);
+        prefix.textContent = acc ? (CURRENCY_SYMBOLS[acc.currency] || '$') : '$';
+    });
 
     // Header filter
     const PERIOD_LABELS = { all: 'All time', month: 'This month', week: 'This week' };
@@ -2284,6 +1980,16 @@ document.addEventListener('DOMContentLoaded', () => {
         else showToast('Please select both dates');
     });
 
+    // Bar chart toggle
+    document.querySelectorAll('.chart-toggle-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.chart-toggle-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            barChartView = this.dataset.view;
+            updateBarChart();
+        });
+    });
+
     // Budget modals
     document.getElementById('btnManageBudgets').addEventListener('click', () => { updateBudgetManageList(); document.getElementById('budgetModal').classList.add('active'); });
     document.getElementById('btnCloseBudget').addEventListener('click',   () => document.getElementById('budgetModal').classList.remove('active'));
@@ -2303,6 +2009,18 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('setBudgetForm').reset();
         currentBudgetCategoryId = null;
         showToast('Budget saved');
+    });
+
+    // Category transactions modal
+    document.getElementById('btnCloseCatTx').addEventListener('click', () => document.getElementById('categoryTxModal').classList.remove('active'));
+    document.getElementById('categoryTxModal').addEventListener('click', e => { if (e.target === e.currentTarget) e.currentTarget.classList.remove('active'); });
+    document.getElementById('btnViewAllCatTx').addEventListener('click', () => {
+        document.getElementById('categoryTxModal').classList.remove('active');
+        historyFilterCategoryId = currentCatTxCategoryId;
+        // Navigate to history
+        document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+        document.querySelector('[data-section="historySection"]').classList.add('active');
+        showSection('historySection');
     });
 
     // History search
