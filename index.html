@@ -300,6 +300,20 @@
         .budget-remaining-label.ok { color: var(--success); }
         .budget-remaining-label.warn { color: var(--warning); }
         .budget-remaining-label.over { color: var(--danger); }
+        /* Subscriptions */
+        .sub-item { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border-color); }
+        .sub-item:last-child { border-bottom: none; }
+        .sub-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; background: var(--bg-tertiary); }
+        .sub-info { flex: 1; min-width: 0; }
+        .sub-name { font-weight: 700; font-size: 0.875rem; color: var(--text-primary); }
+        .sub-meta { font-size: 0.75rem; color: var(--text-secondary); margin-top: 2px; }
+        .sub-right { text-align: right; flex-shrink: 0; }
+        .sub-amount { font-weight: 700; font-size: 0.9rem; color: var(--text-primary); }
+        .sub-due { font-size: 0.7rem; margin-top: 3px; font-weight: 600; padding: 2px 7px; border-radius: 20px; display: inline-block; }
+        .sub-due.soon { background: #fef3c7; color: #92400e; }
+        .sub-due.overdue { background: var(--danger-light); color: var(--danger); }
+        .sub-due.ok { background: var(--bg-tertiary); color: var(--text-secondary); }
+        .sub-actions { display: flex; gap: 6px; align-items: center; }
         .history-content { padding: 0 16px 16px; }
         .history-search { position: relative; margin: 12px 0 4px; }
         .history-search input { padding-left: 38px; font-size: 0.9rem; }
@@ -555,6 +569,14 @@
                     </div>
                     <div id="budgetList"></div>
                 </div>
+                <!-- Subscriptions -->
+                <div class="chart-card">
+                    <div class="chart-card-header">
+                        <h3>Subscriptions</h3>
+                        <button class="btn-ghost" id="btnAddSubscription">+ Add</button>
+                    </div>
+                    <div id="subscriptionList"><p style="text-align:center;padding:24px 0;color:var(--text-tertiary);font-size:0.875rem;">No subscriptions yet.<br>Tap "+ Add" to get started.</p></div>
+                </div>
                 <!-- Bar chart with toggle -->
                 <div class="chart-card">
                     <div class="chart-card-header">
@@ -736,12 +758,41 @@
         </div>
     </div>
 </div>
+<!-- Modal: Subscription -->
+<div class="modal" id="subscriptionModal">
+    <div class="modal-content">
+        <div class="modal-handle"></div>
+        <div class="modal-header"><span class="modal-title" id="subModalTitle">New Subscription</span><button class="modal-close" id="btnCloseSubscription">✕</button></div>
+        <form id="subscriptionForm">
+            <div class="modal-body">
+                <input type="hidden" id="editSubId">
+                <div class="form-group"><label for="subName">Name</label><input type="text" id="subName" required placeholder="e.g. Netflix, Amazon Prime…"></div>
+                <div class="form-group"><label for="subEmoji">Icon (emoji)</label><input type="text" id="subEmoji" placeholder="e.g. 🎬" maxlength="2" style="width:70px;text-align:center;font-size:1.4rem;"></div>
+                <div class="form-group"><label for="subAmount">Amount</label>
+                    <div class="amount-input-wrap"><span class="currency-prefix">$</span><input type="number" id="subAmount" inputmode="decimal" step="0.01" min="0" required placeholder="0.00"></div>
+                </div>
+                <div class="form-group"><label for="subCurrency">Currency</label>
+                    <select id="subCurrency"><option value="USD">USD — Dollar</option><option value="MXN">MXN — Peso</option><option value="EUR">EUR — Euro</option></select>
+                </div>
+                <div class="form-group"><label for="subCycle">Billing cycle</label>
+                    <select id="subCycle"><option value="monthly">Monthly</option><option value="yearly">Yearly</option><option value="weekly">Weekly</option></select>
+                </div>
+                <div class="form-group" style="margin-bottom:0;"><label for="subNextDate">Next billing date</label><input type="date" id="subNextDate" required></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-modal-cancel" id="btnCancelSubscription">Cancel</button>
+                <button type="submit" class="btn-modal-confirm">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
 <script>
 // ── State ──────────────────────────────────────────────────────────────────
-let transactions = [];
-let categories   = [];
-let budgets      = [];
-let accounts     = [];
+let transactions  = [];
+let categories    = [];
+let budgets       = [];
+let accounts      = [];
+let subscriptions = [];
 let weeklyRingChart = null;
 let barChartInst    = null;
 let currentFilter   = 'all';
@@ -776,21 +827,35 @@ function getDefaultCategories() {
     ];
 }
 
+// ── Date helpers (timezone-safe) ─────────────────────────────────────────────
+// Always use local time, never UTC, to avoid the 1-day offset in negative timezones (MX = UTC-5/6)
+function localDateStr(date) {
+    const d = date || new Date();
+    return d.getFullYear() + '-' +
+        String(d.getMonth() + 1).padStart(2, '0') + '-' +
+        String(d.getDate()).padStart(2, '0');
+}
+function setInputDateToday(inputEl) {
+    inputEl.value = localDateStr();
+}
+
 // ── Persistence ──────────────────────────────────────────────────────────────
 function loadData() {
-    transactions = JSON.parse(localStorage.getItem('transactions')) || [];
-    categories   = JSON.parse(localStorage.getItem('categories'))   || getDefaultCategories();
-    budgets      = JSON.parse(localStorage.getItem('budgets'))      || [];
-    accounts     = JSON.parse(localStorage.getItem('accounts'))     || [];
-    weeklySalary = parseFloat(localStorage.getItem('weeklySalary')) || 0;
-    exchangeRate = parseFloat(localStorage.getItem('exchangeRate')) || 17.5;
+    transactions  = JSON.parse(localStorage.getItem('transactions'))  || [];
+    categories    = JSON.parse(localStorage.getItem('categories'))    || getDefaultCategories();
+    budgets       = JSON.parse(localStorage.getItem('budgets'))       || [];
+    accounts      = JSON.parse(localStorage.getItem('accounts'))      || [];
+    subscriptions = JSON.parse(localStorage.getItem('subscriptions')) || [];
+    weeklySalary  = parseFloat(localStorage.getItem('weeklySalary'))  || 0;
+    exchangeRate  = parseFloat(localStorage.getItem('exchangeRate'))  || 17.5;
 }
 
 function saveData() {
-    localStorage.setItem('transactions', JSON.stringify(transactions));
+    localStorage.setItem('transactions',  JSON.stringify(transactions));
     localStorage.setItem('categories',   JSON.stringify(categories));
     localStorage.setItem('budgets',      JSON.stringify(budgets));
     localStorage.setItem('accounts',     JSON.stringify(accounts));
+    localStorage.setItem('subscriptions', JSON.stringify(subscriptions));
 }
 
 // ── Toast ────────────────────────────────────────────────────────────────────
@@ -1019,7 +1084,7 @@ function doTransfer() {
         if (!proceed) return;
     }
 
-    const date = new Date().toISOString().split('T')[0];
+    const date = localDateStr();
     const tid  = Date.now();
     const xrNote = fromA.currency !== toA.currency ? ` [${fromA.currency}→${toA.currency}]` : '';
     transactions.push({ id: tid,   type: 'transfer-out', accountId: fromId, linkedTransferId: tid+1, amount, date, description: desc || `Transfer → ${toA.name}${xrNote}` });
@@ -1073,7 +1138,7 @@ function addTransaction(type) {
     saveData(); updateUI();
     // Reset form
     document.getElementById('quickForm').reset();
-    document.getElementById('date').valueAsDate = new Date();
+    document.getElementById('date').value = localDateStr();
     document.getElementById('amountCurrencyPrefix').textContent = '$';
     showToast(type === 'income' ? 'Income added' : 'Expense added', type);
 }
@@ -1086,14 +1151,8 @@ function getHeaderFilteredTransactions() {
         return transactions.filter(t => t.date.startsWith(cm));
     }
     if (headerFilter === 'week') {
-        const d = new Date(now);
-        const day = d.getDay();
-        const diff = d.getDate() - day + (day === 0 ? -6 : 1);
-        const monday = new Date(d.setDate(diff));
-        monday.setHours(0,0,0,0);
-        const monStr   = monday.toISOString().split('T')[0];
-        const todayStr = new Date().toISOString().split('T')[0];
-        return transactions.filter(t => t.date >= monStr && t.date <= todayStr);
+        const { start, end } = getCurrentWeekRange();
+        return transactions.filter(t => t.date >= start && t.date <= end);
     }
     return transactions;
 }
@@ -1138,21 +1197,53 @@ function getFilteredTransactions() {
     return f;
 }
 
-// Get current week Mon-Sun date strings
+// Get current week Fri-Thu date strings (week resets on Friday)
 function getCurrentWeekRange() {
     const now = new Date();
-    const day = now.getDay(); // 0=Sun
-    const diffToMon = day === 0 ? -6 : 1 - day;
-    const mon = new Date(now);
-    mon.setDate(now.getDate() + diffToMon);
-    mon.setHours(0,0,0,0);
-    const sun = new Date(mon);
-    sun.setDate(mon.getDate() + 6);
+    const day = now.getDay(); // 0=Sun,1=Mon,...,5=Fri,6=Sat
+    // Days since last Friday: Fri=0, Sat=1, Sun=2, Mon=3, Tue=4, Wed=5, Thu=6
+    const daysSinceFri = (day + 2) % 7;
+    const fri = new Date(now);
+    fri.setDate(now.getDate() - daysSinceFri);
+    fri.setHours(0,0,0,0);
+    const thu = new Date(fri);
+    thu.setDate(fri.getDate() + 6);
     return {
-        start: mon.toISOString().split('T')[0],
-        end:   sun.toISOString().split('T')[0],
-        mon, sun
+        start: localDateStr(fri),
+        end:   localDateStr(thu),
+        mon: fri, sun: thu
     };
+}
+
+// Get current budget period range for a given period type
+function getBudgetPeriodRange(period) {
+    const now = new Date();
+    if (period === 'weekly') {
+        return getCurrentWeekRange();
+    } else if (period === 'monthly') {
+        const y = now.getFullYear(), m = now.getMonth();
+        const first = new Date(y, m, 1);
+        const last  = new Date(y, m+1, 0);
+        return {
+            start: localDateStr(first),
+            end:   localDateStr(last)
+        };
+    } else if (period === 'daily') {
+        const today = localDateStr(now);
+        return { start: today, end: today };
+    }
+    return null;
+}
+
+// Convert a transaction amount to USD based on its account currency
+function txAmountInUSD(t) {
+    const account = accounts.find(a => a.id === t.accountId);
+    const currency = account ? (account.currency || 'MXN') : 'MXN';
+    if (currency === 'USD') return t.amount;
+    if (currency === 'MXN') return t.amount / exchangeRate;
+    if (currency === 'EUR') return t.amount * 1.08;
+    if (currency === 'CAD') return t.amount * 0.74;
+    return t.amount; // OTHER
 }
 
 function updateAnalysis() {
@@ -1165,6 +1256,7 @@ function updateAnalysis() {
     document.getElementById('statCount').textContent   = f.length;
     updateWeeklyRingChart();
     updateBudgetList();
+    updateSubscriptionList();
     updateBarChart();
 }
 
@@ -1177,21 +1269,20 @@ function updateWeeklyRingChart() {
     const fmt = d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
     document.getElementById('weekRangeLabel').textContent = fmt(mon) + ' – ' + fmt(sun);
 
-    // Weekly expenses this week
+    // Weekly expenses this week (converted to USD)
     const weekExp = transactions
         .filter(t => t.type === 'expense' && t.date >= start && t.date <= end)
-        .reduce((s,t) => s+t.amount, 0);
+        .reduce((s,t) => s + txAmountInUSD(t), 0);
 
-    // Get effective weekly salary (also add weekly portion of monthly budgets)
-    let effectiveSalary = weeklySalary;
-    // If no salary set, try sum of weekly-equivalent budgets
-    if (effectiveSalary <= 0) {
-        budgets.forEach(b => {
-            if (b.period === 'weekly')       effectiveSalary += b.amount;
-            else if (b.period === 'monthly') effectiveSalary += b.amount / 4.33;
-            else if (b.period === 'daily')   effectiveSalary += b.amount * 7;
-        });
-    }
+    // 100% = sum of all budgets converted to weekly USD equivalent
+    let effectiveSalary = 0;
+    budgets.forEach(b => {
+        if (b.period === 'weekly')       effectiveSalary += b.amount;
+        else if (b.period === 'monthly') effectiveSalary += b.amount / 4.33;
+        else if (b.period === 'daily')   effectiveSalary += b.amount * 7;
+    });
+    // Fallback to manually set weekly salary if no budgets
+    if (effectiveSalary <= 0) effectiveSalary = weeklySalary;
 
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
 
@@ -1203,7 +1294,7 @@ function updateWeeklyRingChart() {
 
     if (effectiveSalary <= 0) {
         amountEl.textContent  = '—';
-        pctEl.textContent     = 'Set salary in Settings';
+        pctEl.textContent     = 'Set budgets or salary in Settings';
         legendEl.innerHTML    = '';
         // Still draw empty donut
         weeklyRingChart = new Chart(ctx, {
@@ -1584,7 +1675,11 @@ function getBudgetForCategory(id) { return budgets.find(b => b.categoryId === id
 function calcBudgetProgress(categoryId) {
     const bud = getBudgetForCategory(categoryId);
     if (!bud) return null;
-    const spent = getFilteredTransactions().filter(t => t.categoryId === categoryId && t.type === 'expense').reduce((s,t) => s+t.amount, 0);
+    const range = getBudgetPeriodRange(bud.period);
+    let txs = transactions.filter(t => t.categoryId === categoryId && t.type === 'expense');
+    if (range) txs = txs.filter(t => t.date >= range.start && t.date <= range.end);
+    // Budget is in USD; convert each transaction to USD based on its account currency
+    const spent = txs.reduce((s,t) => s + txAmountInUSD(t), 0);
     const pct = (spent / bud.amount) * 100;
     const rem = bud.amount - spent;
     const status = pct >= 100 ? 'over' : pct >= 80 ? 'warn' : 'ok';
@@ -1620,7 +1715,7 @@ function updateBudgetList() {
     container.innerHTML = withBudget.map(cat => {
         const p = calcBudgetProgress(cat.id);
         if (!p) return '';
-        const periodLabel = { monthly: 'Monthly', weekly: 'Weekly', daily: 'Daily' }[p.period] || '';
+        const periodLabel = { monthly: 'Monthly', weekly: 'Weekly (resets Fri)', daily: 'Daily' }[p.period] || '';
         const safeName = cat.name.replace(/'/g, "\\'");
         return `<div class="budget-item" data-cat-id="${cat.id}">
             <div class="budget-header">
@@ -1628,12 +1723,12 @@ function updateBudgetList() {
                     <span class="budget-drag-handle" title="Hold to reorder">≡</span>
                     <span class="budget-category">${cat.name}</span>
                 </div>
-                <span class="budget-amount-label">${periodLabel} · $${p.budget.toFixed(0)}</span>
+                <span class="budget-amount-label">${periodLabel} · $${p.budget.toFixed(0)} USD</span>
             </div>
             <div class="budget-bar-track"><div class="budget-bar-fill ${p.status}" style="width:${p.pct}%"></div></div>
             <div class="budget-footer">
-                <span class="budget-spent-label">Spent: $${p.spent.toFixed(2)}</span>
-                <span class="budget-remaining-label ${p.status}">${p.remaining >= 0 ? 'Left: $'+p.remaining.toFixed(2) : 'Over by: $'+Math.abs(p.remaining).toFixed(2)}</span>
+                <span class="budget-spent-label">Spent: $${p.spent.toFixed(2)} USD</span>
+                <span class="budget-remaining-label ${p.status}">${p.remaining >= 0 ? 'Left: $'+p.remaining.toFixed(2)+' USD' : 'Over by: $'+Math.abs(p.remaining).toFixed(2)+' USD'}</span>
             </div>
         </div>`;
     }).join('');
@@ -1822,10 +1917,100 @@ function removeBudgetAndUpdate(id) {
     showToast('Budget removed');
 }
 
+// ── Subscriptions ─────────────────────────────────────────────────────────────
+const SUB_CYCLE_LABELS = { monthly: 'Monthly', yearly: 'Yearly', weekly: 'Weekly' };
+const CURRENCY_SYM = { USD: '$', MXN: '$', EUR: '€' };
+
+function subAmountInUSD(sub) {
+    if (sub.currency === 'USD') return sub.amount;
+    if (sub.currency === 'MXN') return sub.amount / exchangeRate;
+    if (sub.currency === 'EUR') return sub.amount * 1.08;
+    return sub.amount;
+}
+
+function subMonthlyUSD(sub) {
+    const usd = subAmountInUSD(sub);
+    if (sub.cycle === 'monthly') return usd;
+    if (sub.cycle === 'yearly')  return usd / 12;
+    if (sub.cycle === 'weekly')  return usd * 4.33;
+    return usd;
+}
+
+function updateSubscriptionList() {
+    const container = document.getElementById('subscriptionList');
+    if (!subscriptions.length) {
+        container.innerHTML = '<p style="text-align:center;padding:24px 0;color:var(--text-tertiary);font-size:0.875rem;">No subscriptions yet.<br>Tap "+ Add" to get started.</p>';
+        return;
+    }
+    const today = new Date(); today.setHours(0,0,0,0);
+    const sorted = [...subscriptions].sort((a,b) => a.nextDate.localeCompare(b.nextDate));
+    const totalMonthly = subscriptions.reduce((s,sub) => s + subMonthlyUSD(sub), 0);
+
+    container.innerHTML = sorted.map(sub => {
+        const next = new Date(sub.nextDate + 'T00:00:00');
+        const diffDays = Math.round((next - today) / 86400000);
+        let dueClass, dueText;
+        if (diffDays < 0)      { dueClass = 'overdue'; dueText = `Overdue ${Math.abs(diffDays)}d`; }
+        else if (diffDays <= 5){ dueClass = 'soon';    dueText = diffDays === 0 ? 'Due today' : `In ${diffDays}d`; }
+        else                   { dueClass = 'ok';      dueText = next.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); }
+        const sym = CURRENCY_SYM[sub.currency] || '$';
+        const usdNote = sub.currency !== 'USD' ? ` ≈ $${subAmountInUSD(sub).toFixed(2)} USD` : '';
+        return `<div class="sub-item">
+            <div class="sub-icon">${sub.emoji || '📦'}</div>
+            <div class="sub-info">
+                <div class="sub-name">${sub.name}</div>
+                <div class="sub-meta">${SUB_CYCLE_LABELS[sub.cycle] || sub.cycle}${usdNote}</div>
+            </div>
+            <div class="sub-right">
+                <div class="sub-amount">${sym}${sub.amount.toFixed(2)} ${sub.currency}</div>
+                <div class="sub-due ${dueClass}">${dueText}</div>
+            </div>
+            <div class="sub-actions">
+                <button class="btn-icon-sm" onclick="openEditSubscription(${sub.id})" title="Edit">✏️</button>
+                <button class="btn-icon-sm" onclick="deleteSubscription(${sub.id})" title="Delete">✕</button>
+            </div>
+        </div>`;
+    }).join('') +
+    `<div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border-color);display:flex;justify-content:space-between;font-size:0.8rem;color:var(--text-secondary);">
+        <span>Total / month (est.)</span>
+        <strong style="color:var(--text-primary);">$${totalMonthly.toFixed(2)} USD</strong>
+    </div>`;
+}
+
+function openAddSubscription() {
+    document.getElementById('editSubId').value = '';
+    document.getElementById('subModalTitle').textContent = 'New Subscription';
+    document.getElementById('subscriptionForm').reset();
+    // Default next date = today
+    document.getElementById('subNextDate').value = localDateStr();
+    document.getElementById('subscriptionModal').classList.add('active');
+}
+
+function openEditSubscription(id) {
+    const sub = subscriptions.find(s => s.id === id);
+    if (!sub) return;
+    document.getElementById('editSubId').value = id;
+    document.getElementById('subModalTitle').textContent = 'Edit Subscription';
+    document.getElementById('subName').value     = sub.name;
+    document.getElementById('subEmoji').value    = sub.emoji || '';
+    document.getElementById('subAmount').value   = sub.amount;
+    document.getElementById('subCurrency').value = sub.currency || 'USD';
+    document.getElementById('subCycle').value    = sub.cycle;
+    document.getElementById('subNextDate').value = sub.nextDate;
+    document.getElementById('subscriptionModal').classList.add('active');
+}
+
+function deleteSubscription(id) {
+    if (!confirm('Delete this subscription?')) return;
+    subscriptions = subscriptions.filter(s => s.id !== id);
+    saveData(); updateSubscriptionList();
+    showToast('Subscription removed');
+}
+
 // ── Init ──────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     loadData();
-    document.getElementById('date').valueAsDate = new Date();
+    document.getElementById('date').value = localDateStr();
     updateCategoryOptions();
     updateAccountOptions();
     updateUI();
@@ -1968,8 +2153,8 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('customDateFilter').style.display = currentFilter === 'custom' ? 'block' : 'none';
             if (currentFilter === 'custom') {
                 const now = new Date();
-                document.getElementById('filterStartDate').valueAsDate = new Date(now.getFullYear(), now.getMonth(), 1);
-                document.getElementById('filterEndDate').valueAsDate   = now;
+                document.getElementById('filterStartDate').value = localDateStr(new Date(now.getFullYear(), now.getMonth(), 1));
+                document.getElementById('filterEndDate').value   = localDateStr(now);
             } else { updateAnalysis(); }
         });
     });
@@ -2009,6 +2194,31 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('setBudgetForm').reset();
         currentBudgetCategoryId = null;
         showToast('Budget saved');
+    });
+
+    // Subscriptions
+    document.getElementById('btnAddSubscription').addEventListener('click', openAddSubscription);
+    document.getElementById('btnCloseSubscription').addEventListener('click', () => document.getElementById('subscriptionModal').classList.remove('active'));
+    document.getElementById('btnCancelSubscription').addEventListener('click', () => document.getElementById('subscriptionModal').classList.remove('active'));
+    document.getElementById('subscriptionModal').addEventListener('click', e => { if (e.target === e.currentTarget) e.currentTarget.classList.remove('active'); });
+    document.getElementById('subscriptionForm').addEventListener('submit', e => {
+        e.preventDefault();
+        const id      = document.getElementById('editSubId').value;
+        const name    = document.getElementById('subName').value.trim();
+        const emoji   = document.getElementById('subEmoji').value.trim();
+        const amount  = parseFloat(document.getElementById('subAmount').value);
+        const currency= document.getElementById('subCurrency').value;
+        const cycle   = document.getElementById('subCycle').value;
+        const nextDate= document.getElementById('subNextDate').value;
+        if (id) {
+            const sub = subscriptions.find(s => s.id === parseInt(id));
+            if (sub) Object.assign(sub, { name, emoji, amount, currency, cycle, nextDate });
+        } else {
+            subscriptions.push({ id: Date.now(), name, emoji, amount, currency, cycle, nextDate });
+        }
+        saveData(); updateSubscriptionList();
+        document.getElementById('subscriptionModal').classList.remove('active');
+        showToast(id ? 'Subscription updated' : 'Subscription added');
     });
 
     // Category transactions modal
